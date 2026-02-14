@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SERVICES, BERGEN_TOWNS } from "@/lib/data";
 
+export const dynamic = "force-static";
+
 const BASE_URL = "https://patchboysbergen.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
