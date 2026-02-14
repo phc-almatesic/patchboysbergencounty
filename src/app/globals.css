@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1B2D6E;
+  --color-navy-dark: #0F1D4A;
+  --color-navy-light: #2A4494;
+  --color-orange: #F26522;
+  --color-orange-dark: #D4541A;
+  --color-orange-light: #FF8447;
+  --color-gray-warm: #F5F3F0;
+  --color-gray-medium: #E8E4E0;
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #4a4a5a;
+
+  --font-heading: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
