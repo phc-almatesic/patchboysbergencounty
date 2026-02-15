@@ -175,7 +175,10 @@ function TestimonialsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
             <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-              <div className="text-orange text-lg mb-3">{"★".repeat(t.rating)}</div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-orange text-lg">{"★".repeat(t.rating)}</div>
+                {"source" in t && <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-1 rounded">{(t as { source: string }).source}</span>}
+              </div>
               <p className="text-gray-700 leading-relaxed mb-4 italic">&ldquo;{t.text}&rdquo;</p>
               <div>
                 <p className="font-bold text-navy">{t.name}</p>

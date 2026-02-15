@@ -1,5 +1,6 @@
 import { BUSINESS } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
+import GoogleMap from "@/components/GoogleMap";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -89,6 +90,14 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-16 bg-gray-warm">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-navy mb-6 text-center">Our Service Area — All of Bergen County</h2>
+          <GoogleMap />
         </div>
       </section>
     </>

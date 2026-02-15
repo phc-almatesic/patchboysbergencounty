@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { BUSINESS, BERGEN_TOWNS } from "@/lib/data";
-import { trackEvent } from "@/lib/tracking";
+import { pushEvent } from "./TrackingProvider";
 
 export default function ContactForm({ variant = "full" }: { variant?: "full" | "compact" }) {
   const [submitted, setSubmitted] = useState(false);
@@ -26,8 +26,8 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       if (res.ok) {
         setSubmitted(true);
-        trackEvent("form_submitted", {
-          form_type: "estimate_request",
+        pushEvent("form_submitted", {
+          form_type: variant === "full" ? "contact_page" : "inline_hero",
           service: data.get("service")?.toString() || "",
           town: data.get("town")?.toString() || "",
         });

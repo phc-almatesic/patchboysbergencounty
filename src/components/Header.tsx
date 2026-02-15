@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BUSINESS } from "@/lib/data";
+import { pushEvent } from "./TrackingProvider";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <span className="hidden sm:inline">Serving All of Bergen County, NJ</span>
           <div className="flex items-center gap-4 mx-auto sm:mx-0">
-            <a href={`tel:${BUSINESS.phone}`} className="font-bold hover:text-orange transition-colors">
+            <a href={`tel:${BUSINESS.phone}`} className="font-bold hover:text-orange transition-colors" onClick={() => pushEvent("phone_click", { location: "top_bar" })}>
               📞 {BUSINESS.phone}
             </a>
             <span className="hidden md:inline text-gray-300">|</span>
@@ -76,7 +77,7 @@ export default function Header() {
               >
                 Free Estimate
               </Link>
-              <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-6 py-3 rounded-lg text-center">
+              <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-6 py-3 rounded-lg text-center" onClick={() => pushEvent("phone_click", { location: "mobile_menu" })}>
                 Call {BUSINESS.phone}
               </a>
             </nav>
