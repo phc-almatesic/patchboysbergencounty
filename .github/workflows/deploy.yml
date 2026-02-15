@@ -35,7 +35,7 @@ jobs:
 
       - name: Deploy to Cloudways
         run: |
-          sshpass -p "${{ secrets.CLOUDWAYS_SSH_PASSWORD }}" rsync -avz --delete \
+          sshpass -p "${{ secrets.CLOUDWAYS_SSH_PASSWORD }}" rsync -rlvz --delete --no-perms --no-times --no-owner --no-group \
             -e "ssh" \
             out/ \
             master_ysczmbeyuv@64.227.5.40:/home/380964.cloudwaysapps.com/sxvdrtfdfa/public_html/
