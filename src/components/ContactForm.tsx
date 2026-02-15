@@ -5,10 +5,34 @@ import { BUSINESS, BERGEN_TOWNS } from "@/lib/data";
 
 export default function ContactForm({ variant = "full" }: { variant?: "full" | "compact" }) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(false);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/xpqjdlnz", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -27,11 +51,19 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center text-red-700">
+          Something went wrong. Please try again or call us at{" "}
+          <a href={`tel:${BUSINESS.phone}`} className="font-bold underline">{BUSINESS.phone}</a>
+        </div>
+      )}
+
       <div className={variant === "full" ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-4"}>
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
           <input
             type="text"
+            name="name"
             required
             placeholder="John Smith"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
@@ -41,6 +73,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
           <label className="block text-sm font-semibold text-gray-700 mb-1">Phone Number *</label>
           <input
             type="tel"
+            name="phone"
             required
             placeholder="(201) 555-0199"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
@@ -53,6 +86,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
           <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
           <input
             type="email"
+            name="email"
             required
             placeholder="john@example.com"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
@@ -61,6 +95,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Town / City *</label>
           <select
+            name="town"
             required
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white"
           >
@@ -75,7 +110,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       <div>
         <label className="block text-sm font-semibold text-gray-700 mb-1">Service Needed</label>
-        <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white">
+        <select name="service" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white">
           <option value="">Select a service...</option>
           <option value="drywall-repair">Drywall Repair</option>
           <option value="ceiling-repair">Ceiling Repair</option>
@@ -92,6 +127,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Describe Your Project</label>
           <textarea
+            name="message"
             rows={4}
             placeholder="Tell us about your drywall repair needs, the number of holes/areas to fix, and any other details..."
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all resize-y"
@@ -101,9 +137,10 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       <button
         type="submit"
-        className="w-full bg-orange text-white font-bold py-4 px-8 rounded-lg hover:bg-orange-dark transition-colors shadow-lg text-lg"
+        disabled={submitting}
+        className="w-full bg-orange text-white font-bold py-4 px-8 rounded-lg hover:bg-orange-dark transition-colors shadow-lg text-lg disabled:opacity-50"
       >
-        Get My Free Estimate →
+        {submitting ? "Sending..." : "Get My Free Estimate →"}
       </button>
 
       <p className="text-xs text-gray-500 text-center">

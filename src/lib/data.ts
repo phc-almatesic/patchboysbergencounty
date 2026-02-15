@@ -1,7 +1,7 @@
 export const BUSINESS = {
   name: "The Patch Boys of Bergen County",
-  phone: "(201) 555-0199",
-  email: "bergen@thepatchboys.com",
+  phone: "(201) 630-7181",
+  email: "almatesic@gmail.com",
   tagline: "Seamless Patches. Superior Service.™",
   description: "Bergen County's trusted drywall repair experts. Fast, professional drywall and ceiling repairs with free estimates and same-day service.",
   address: "Bergen County, NJ",
