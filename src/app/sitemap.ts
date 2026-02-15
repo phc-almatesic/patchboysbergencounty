@@ -3,7 +3,7 @@ import { SERVICES, BERGEN_TOWNS } from "@/lib/data";
 
 export const dynamic = "force-static";
 
-const BASE_URL = "https://patchboysbergen.com";
+const BASE_URL = "https://www.bergencountypatchboys.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
