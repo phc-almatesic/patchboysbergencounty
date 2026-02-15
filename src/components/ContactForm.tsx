@@ -50,7 +50,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-4">
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center text-red-700">
           Something went wrong. Please try again or call us at{" "}
@@ -124,15 +124,45 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
       </div>
 
       {variant === "full" && (
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Describe Your Project</label>
-          <textarea
-            name="message"
-            rows={4}
-            placeholder="Tell us about your drywall repair needs, the number of holes/areas to fix, and any other details..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all resize-y"
-          />
-        </div>
+        <>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Describe Your Project</label>
+            <textarea
+              name="message"
+              rows={4}
+              placeholder="Tell us about your drywall repair needs, the number of holes/areas to fix, and any other details..."
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all resize-y"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Upload Photos of Your Damage <span className="text-gray-400 font-normal">(Optional)</span>
+            </label>
+            <label className="flex flex-col items-center justify-center w-full px-4 py-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange hover:bg-orange-50 transition-all">
+              <svg className="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="text-sm text-gray-600 font-medium">Tap to upload photos</span>
+              <span className="text-xs text-gray-400 mt-1">Up to 4 images (JPG, PNG, HEIC)</span>
+              <input
+                type="file"
+                name="photos"
+                multiple
+                accept="image/jpeg,image/png,image/heic,image/heif"
+                className="hidden"
+                onChange={(e) => {
+                  const label = e.target.closest("label");
+                  const files = e.target.files;
+                  if (label && files && files.length > 0) {
+                    const span = label.querySelector("span");
+                    if (span) span.textContent = `${files.length} photo${files.length > 1 ? "s" : ""} selected`;
+                  }
+                }}
+              />
+            </label>
+          </div>
+        </>
       )}
 
       <button
