@@ -38,4 +38,4 @@ jobs:
           sshpass -p "${{ secrets.CLOUDWAYS_SSH_PASSWORD }}" rsync -avz --delete \
             -e "ssh" \
             out/ \
-            patchboys-swamp80@64.227.5.40:/home/380964.cloudwaysapps.com/sxvdrtfdfa/public_html/
+            master_ysczmbeyuv@64.227.5.40:/home/380964.cloudwaysapps.com/sxvdrtfdfa/public_html/
