@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Us | Free Drywall Repair Estimate in Bergen County NJ",
   description: "Request a free, no-obligation drywall repair estimate in Bergen County, NJ. Call or fill out our form for fast, professional service.",
+  alternates: {
+    canonical: "/contact/",
+  },
 };
 
 export default function ContactPage() {

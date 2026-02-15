@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const town = BERGEN_TOWNS.find((t) => t.slug === slug);
   if (!town) return {};
   return {
-    title: `Drywall Repair in ${town.name}, NJ | ${BUSINESS.name}`,
+    title: `Drywall Repair in ${town.name}, NJ`,
     description: `Expert drywall repair, ceiling repair, and plaster repair services in ${town.name}, NJ ${town.zip}. Free estimates, same-day service, and satisfaction guaranteed. Call ${BUSINESS.phone}.`,
     keywords: [
       `drywall repair ${town.name} NJ`,
@@ -24,6 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `drywall contractor ${town.name}`,
       `sheetrock repair ${town.name} New Jersey`,
     ],
+    alternates: {
+      canonical: `/areas/${slug}/`,
+    },
+    openGraph: {
+      title: `Drywall Repair in ${town.name}, NJ`,
+      description: `Expert drywall repair services in ${town.name}, NJ ${town.zip}. Free estimates and same-day service.`,
+    },
   };
 }
 
@@ -156,33 +163,46 @@ export default async function TownPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Schema */}
+      {/* LocalBusiness + BreadcrumbList Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            name: `${BUSINESS.name} - ${town.name}`,
-            description: `Professional drywall repair services in ${town.name}, NJ ${town.zip}`,
-            telephone: BUSINESS.phone,
-            email: BUSINESS.email,
-            areaServed: {
-              "@type": "City",
-              name: town.name,
-              containedInPlace: {
-                "@type": "County",
-                name: "Bergen County",
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: `${BUSINESS.name} - ${town.name}`,
+              description: `Professional drywall repair services in ${town.name}, NJ ${town.zip}`,
+              url: `https://www.bergencountypatchboys.com/areas/${town.slug}/`,
+              telephone: BUSINESS.phone,
+              email: BUSINESS.email,
+              image: "https://www.bergencountypatchboys.com/logo.png",
+              areaServed: {
+                "@type": "City",
+                name: town.name,
+                containedInPlace: {
+                  "@type": "County",
+                  name: "Bergen County",
+                },
+              },
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: town.name,
+                addressRegion: "NJ",
+                postalCode: town.zip,
+                addressCountry: "US",
               },
             },
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: town.name,
-              addressRegion: "NJ",
-              postalCode: town.zip,
-              addressCountry: "US",
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bergencountypatchboys.com/" },
+                { "@type": "ListItem", position: 2, name: "Service Areas", item: "https://www.bergencountypatchboys.com/areas/" },
+                { "@type": "ListItem", position: 3, name: `${town.name}, NJ` },
+              ],
             },
-          }),
+          ]),
         }}
       />
     </>

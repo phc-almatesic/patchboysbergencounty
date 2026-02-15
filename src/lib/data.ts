@@ -4,7 +4,10 @@ export const BUSINESS = {
   email: "almatesic@gmail.com",
   tagline: "Seamless Patches. Superior Service.™",
   description: "Bergen County's trusted drywall repair experts. Fast, professional drywall and ceiling repairs with free estimates and same-day service.",
-  address: "Bergen County, NJ",
+  address: "Ridgewood, NJ 07450",
+  addressLocality: "Ridgewood",
+  addressRegion: "NJ",
+  postalCode: "07450",
   hours: "Mon-Fri: 8AM-6PM | Sat: 9AM-3PM",
   googleMapsEmbed: "",
 };

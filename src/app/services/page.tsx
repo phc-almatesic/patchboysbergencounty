@@ -6,6 +6,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Drywall Repair Services in Bergen County NJ",
   description: "Professional drywall repair, ceiling repair, plaster repair, drywall installation, popcorn ceiling removal, and texture matching services throughout Bergen County, NJ.",
+  alternates: {
+    canonical: "/services/",
+  },
 };
 
 export default function ServicesPage() {

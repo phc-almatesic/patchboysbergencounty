@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Service Areas in Bergen County NJ | Drywall Repair Near You",
   description: `The Patch Boys provides professional drywall repair services to all ${BERGEN_TOWNS.length}+ communities in Bergen County, New Jersey. Find drywall repair near you.`,
+  alternates: {
+    canonical: "/areas/",
+  },
 };
 
 export default function AreasPage() {

@@ -15,9 +15,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = SERVICES.find((s) => s.slug === slug);
   if (!service) return {};
   return {
-    title: `${service.title} in Bergen County NJ | ${BUSINESS.name}`,
+    title: `${service.title} in Bergen County NJ`,
     description: `Professional ${service.title.toLowerCase()} services in Bergen County, New Jersey. ${service.shortDesc} Free estimates available.`,
     keywords: service.keywords,
+    alternates: {
+      canonical: `/services/${slug}/`,
+    },
+    openGraph: {
+      title: `${service.title} in Bergen County NJ`,
+      description: `Professional ${service.title.toLowerCase()} services in Bergen County, NJ. ${service.shortDesc}`,
+    },
   };
 }
 
@@ -131,6 +138,47 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Service + BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              name: `${service.title} in Bergen County, NJ`,
+              description: service.longDesc,
+              provider: {
+                "@type": "LocalBusiness",
+                name: BUSINESS.name,
+                telephone: BUSINESS.phone,
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: BUSINESS.addressLocality,
+                  addressRegion: BUSINESS.addressRegion,
+                  postalCode: BUSINESS.postalCode,
+                  addressCountry: "US",
+                },
+              },
+              areaServed: {
+                "@type": "County",
+                name: "Bergen County",
+                containedInPlace: { "@type": "State", name: "New Jersey" },
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bergencountypatchboys.com/" },
+                { "@type": "ListItem", position: 2, name: "Services", item: "https://www.bergencountypatchboys.com/services/" },
+                { "@type": "ListItem", position: 3, name: service.title },
+              ],
+            },
+          ]),
+        }}
+      />
     </>
   );
 }

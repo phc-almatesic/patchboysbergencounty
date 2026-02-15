@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { BUSINESS, BERGEN_TOWNS } from "@/lib/data";
+import { trackEvent } from "@/lib/tracking";
 
 export default function ContactForm({ variant = "full" }: { variant?: "full" | "compact" }) {
   const [submitted, setSubmitted] = useState(false);
@@ -17,7 +18,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
     const data = new FormData(form);
 
     try {
-      const res = await fetch("https://formspree.io/f/xpqjdlnz", {
+      const res = await fetch(`https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`, {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
@@ -25,6 +26,11 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       if (res.ok) {
         setSubmitted(true);
+        trackEvent("form_submitted", {
+          form_type: "estimate_request",
+          service: data.get("service")?.toString() || "",
+          town: data.get("town")?.toString() || "",
+        });
       } else {
         setError(true);
       }
@@ -51,6 +57,9 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
   return (
     <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-4">
+      <input type="hidden" name="_subject" value="New Estimate Request – Patch Boys Bergen County" />
+      {/* Honeypot field - hidden from real users, catches bots */}
+      <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center text-red-700">
           Something went wrong. Please try again or call us at{" "}

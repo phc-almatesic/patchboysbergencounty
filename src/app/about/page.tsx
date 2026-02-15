@@ -4,8 +4,11 @@ import { BUSINESS } from "@/lib/data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About The Patch Boys of Bergen County NJ",
+  title: "About Us | Drywall Repair Experts in Bergen County NJ",
   description: "Learn about The Patch Boys of Bergen County — your local drywall repair experts. Fully licensed, insured, and committed to flawless results.",
+  alternates: {
+    canonical: "/about/",
+  },
 };
 
 export default function AboutPage() {

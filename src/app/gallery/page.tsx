@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Before & After Gallery | Drywall Repair Results",
   description: "See the incredible before and after results of our drywall repair work throughout Bergen County, NJ. Invisible patches guaranteed.",
+  alternates: {
+    canonical: "/gallery/",
+  },
 };
 
 const GALLERY_ITEMS = [

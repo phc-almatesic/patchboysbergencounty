@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BUSINESS, SERVICES, BERGEN_TOWNS, TESTIMONIALS, FAQ } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
+import PhoneLink from "@/components/PhoneLink";
 
 function HeroSection() {
   return (
@@ -29,12 +30,12 @@ function HeroSection() {
               >
                 Get Your Free Estimate
               </Link>
-              <a
-                href={`tel:${BUSINESS.phone}`}
+              <PhoneLink
+                location="hero"
                 className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy transition-colors text-lg text-center"
               >
                 📞 {BUSINESS.phone}
-              </a>
+              </PhoneLink>
             </div>
             <div className="flex flex-wrap gap-6 text-sm text-gray-300">
               <span className="flex items-center gap-2">✅ Free Estimates</span>
@@ -260,7 +261,7 @@ export default function HomePage() {
       <ServiceAreasPreview />
       <FAQSection />
 
-      {/* JSON-LD Schema */}
+      {/* LocalBusiness Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -269,8 +270,17 @@ export default function HomePage() {
             "@type": "LocalBusiness",
             name: BUSINESS.name,
             description: BUSINESS.description,
+            url: "https://www.bergencountypatchboys.com",
             telephone: BUSINESS.phone,
             email: BUSINESS.email,
+            image: "https://www.bergencountypatchboys.com/logo.png",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: BUSINESS.addressLocality,
+              addressRegion: BUSINESS.addressRegion,
+              postalCode: BUSINESS.postalCode,
+              addressCountry: "US",
+            },
             areaServed: {
               "@type": "County",
               name: "Bergen County",
@@ -293,6 +303,25 @@ export default function HomePage() {
                 },
               })),
             },
+          }),
+        }}
+      />
+
+      {/* FAQPage Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQ.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.a,
+              },
+            })),
           }),
         }}
       />
