@@ -4,10 +4,21 @@ import ServiceImage from "@/components/ServiceImage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Drywall Repair Services in Bergen County NJ",
+  title: { absolute: "Drywall Repair Services | Bergen County NJ" },
   description: "Professional drywall repair, ceiling repair, plaster repair, drywall installation, popcorn ceiling removal, and texture matching services throughout Bergen County, NJ.",
   alternates: {
     canonical: "/services/",
+  },
+  openGraph: {
+    title: "Drywall Repair Services in Bergen County NJ",
+    description: "Professional drywall repair, ceiling repair, plaster repair, drywall installation, popcorn ceiling removal, and texture matching services in Bergen County.",
+    url: "https://www.bergencountypatchboys.com/services/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Drywall Repair Services | Bergen County NJ",
+    description: "Professional drywall repair, ceiling repair, plaster repair, and more throughout Bergen County, NJ.",
   },
 };
 
@@ -91,6 +102,36 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* ItemList + BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "Drywall Repair Services in Bergen County NJ",
+              description: "Professional drywall repair services offered by The Patch Boys of Bergen County.",
+              numberOfItems: SERVICES.length,
+              itemListElement: SERVICES.map((s, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: s.title,
+                url: `https://www.bergencountypatchboys.com/services/${s.slug}/`,
+              })),
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bergencountypatchboys.com/" },
+                { "@type": "ListItem", position: 2, name: "Services" },
+              ],
+            },
+          ]),
+        }}
+      />
     </>
   );
 }

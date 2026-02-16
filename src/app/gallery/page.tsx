@@ -3,10 +3,21 @@ import { BUSINESS } from "@/lib/data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Before & After Gallery | Drywall Repair Results",
+  title: { absolute: "Before & After Gallery | Drywall Repair Results" },
   description: "See the incredible before and after results of our drywall repair work throughout Bergen County, NJ. Invisible patches guaranteed.",
   alternates: {
     canonical: "/gallery/",
+  },
+  openGraph: {
+    title: "Before & After Drywall Repair Gallery | Bergen County NJ",
+    description: "See the incredible before and after results of our drywall repair work throughout Bergen County, NJ.",
+    url: "https://www.bergencountypatchboys.com/gallery/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Before & After Drywall Repair Gallery",
+    description: "See our drywall repair results throughout Bergen County, NJ. Invisible patches guaranteed.",
   },
 };
 
@@ -80,6 +91,21 @@ export default function GalleryPage() {
           </div>
         </div>
       </section>
+
+      {/* BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bergencountypatchboys.com/" },
+              { "@type": "ListItem", position: 2, name: "Gallery" },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }

@@ -9,7 +9,7 @@ import { BUSINESS } from "@/lib/data";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.bergencountypatchboys.com"),
   title: {
-    default: `${BUSINESS.name} | Expert Drywall Repair in Bergen County NJ`,
+    default: "Drywall Repair Bergen County NJ | The Patch Boys",
     template: `%s | ${BUSINESS.name}`,
   },
   description: BUSINESS.description,
@@ -22,13 +22,16 @@ export const metadata: Metadata = {
     "drywall installation Bergen County NJ",
     "sheetrock repair NJ",
     "the patch boys bergen county",
+    "wall repair Bergen County",
+    "drywall contractor Bergen County NJ",
   ],
   openGraph: {
-    title: `${BUSINESS.name} | Expert Drywall Repair`,
+    title: "Drywall Repair Bergen County NJ | The Patch Boys",
     description: BUSINESS.description,
     siteName: BUSINESS.name,
     type: "website",
     locale: "en_US",
+    url: "https://www.bergencountypatchboys.com",
     images: [
       {
         url: "/og-image.png",
@@ -38,8 +41,14 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Drywall Repair Bergen County NJ | The Patch Boys",
+    description: BUSINESS.description,
+    images: ["/og-image.png"],
+  },
   alternates: {
-    canonical: "./",
+    canonical: "/",
   },
   verification: {
     google: "UnEz0qNT_LB9d814wd-ltBhBgisNGNH-xli_Zih9paQ",

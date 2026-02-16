@@ -4,10 +4,21 @@ import { BUSINESS } from "@/lib/data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us | Drywall Repair Experts in Bergen County NJ",
+  title: { absolute: "About Us | Drywall Repair Experts Bergen County" },
   description: "Learn about The Patch Boys of Bergen County — your local drywall repair experts. Fully licensed, insured, and committed to flawless results.",
   alternates: {
     canonical: "/about/",
+  },
+  openGraph: {
+    title: "About The Patch Boys of Bergen County",
+    description: "Learn about The Patch Boys of Bergen County — your local drywall repair experts. Fully licensed, insured, and committed to flawless results.",
+    url: "https://www.bergencountypatchboys.com/about/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About The Patch Boys of Bergen County",
+    description: "Your local drywall repair experts. Fully licensed, insured, and committed to flawless results.",
   },
 };
 
@@ -114,6 +125,44 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Organization + BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: BUSINESS.name,
+              description: BUSINESS.description,
+              url: "https://www.bergencountypatchboys.com",
+              telephone: BUSINESS.phone,
+              email: BUSINESS.email,
+              logo: "https://www.bergencountypatchboys.com/logo.png",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: BUSINESS.addressLocality,
+                addressRegion: BUSINESS.addressRegion,
+                postalCode: BUSINESS.postalCode,
+                addressCountry: "US",
+              },
+              parentOrganization: {
+                "@type": "Organization",
+                name: "BELFOR Franchise Group",
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bergencountypatchboys.com/" },
+                { "@type": "ListItem", position: 2, name: "About Us" },
+              ],
+            },
+          ]),
+        }}
+      />
     </>
   );
 }

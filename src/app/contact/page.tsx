@@ -4,10 +4,21 @@ import GoogleMap from "@/components/GoogleMap";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Free Drywall Repair Estimate in Bergen County NJ",
+  title: { absolute: "Contact Us | Free Drywall Repair Estimate" },
   description: "Request a free, no-obligation drywall repair estimate in Bergen County, NJ. Call or fill out our form for fast, professional service.",
   alternates: {
     canonical: "/contact/",
+  },
+  openGraph: {
+    title: "Get a Free Drywall Repair Estimate in Bergen County NJ",
+    description: "Request a free, no-obligation drywall repair estimate in Bergen County, NJ. Call or fill out our form for fast, professional service.",
+    url: "https://www.bergencountypatchboys.com/contact/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Drywall Repair Estimate | Bergen County NJ",
+    description: "Request a free, no-obligation drywall repair estimate. Call or fill out our form for fast, professional service.",
   },
 };
 
@@ -101,6 +112,57 @@ export default function ContactPage() {
           <GoogleMap />
         </div>
       </section>
+
+      {/* ContactPage + BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              name: "Contact The Patch Boys of Bergen County",
+              description: "Request a free, no-obligation drywall repair estimate in Bergen County, NJ.",
+              url: "https://www.bergencountypatchboys.com/contact/",
+              mainEntity: {
+                "@type": "LocalBusiness",
+                name: BUSINESS.name,
+                telephone: BUSINESS.phone,
+                email: BUSINESS.email,
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: BUSINESS.addressLocality,
+                  addressRegion: BUSINESS.addressRegion,
+                  postalCode: BUSINESS.postalCode,
+                  addressCountry: "US",
+                },
+                openingHoursSpecification: [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    opens: "08:00",
+                    closes: "18:00",
+                  },
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: "Saturday",
+                    opens: "09:00",
+                    closes: "15:00",
+                  },
+                ],
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bergencountypatchboys.com/" },
+                { "@type": "ListItem", position: 2, name: "Contact Us" },
+              ],
+            },
+          ]),
+        }}
+      />
     </>
   );
 }

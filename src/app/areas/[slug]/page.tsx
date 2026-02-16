@@ -14,8 +14,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const town = BERGEN_TOWNS.find((t) => t.slug === slug);
   if (!town) return {};
+  const pageTitle = `Drywall Repair ${town.name} NJ | Patch Boys`;
+  const ogDesc = `Expert drywall repair services in ${town.name}, NJ ${town.zip}. Free estimates and same-day service.`;
   return {
-    title: `Drywall Repair in ${town.name}, NJ`,
+    title: { absolute: pageTitle },
     description: `Expert drywall repair, ceiling repair, and plaster repair services in ${town.name}, NJ ${town.zip}. Free estimates, same-day service, and satisfaction guaranteed. Call ${BUSINESS.phone}.`,
     keywords: [
       `drywall repair ${town.name} NJ`,
@@ -28,8 +30,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/areas/${slug}/`,
     },
     openGraph: {
-      title: `Drywall Repair in ${town.name}, NJ`,
-      description: `Expert drywall repair services in ${town.name}, NJ ${town.zip}. Free estimates and same-day service.`,
+      title: pageTitle,
+      description: ogDesc,
+      url: `https://www.bergencountypatchboys.com/areas/${slug}/`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: ogDesc,
     },
   };
 }
@@ -40,18 +49,20 @@ export default async function TownPage({ params }: Props) {
   if (!town) notFound();
 
   const nearbyTowns = BERGEN_TOWNS.filter((t) => t.slug !== slug).slice(0, 6);
-  const relevantTestimonial = TESTIMONIALS[Math.floor(Math.random() * TESTIMONIALS.length)];
+  // Deterministic testimonial selection based on slug to avoid hydration mismatches
+  const slugHash = slug.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const relevantTestimonial = TESTIMONIALS[slugHash % TESTIMONIALS.length];
 
   return (
     <>
       {/* Hero */}
       <section className="bg-navy py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <nav className="text-sm text-gray-400 mb-6">
-            <Link href="/" className="hover:text-orange">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/areas" className="hover:text-orange">Service Areas</Link>
-            <span className="mx-2">/</span>
+          <nav className="text-sm text-gray-400 mb-6" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1">Home</Link>
+            <span className="mx-2" aria-hidden="true">/</span>
+            <Link href="/areas" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1">Service Areas</Link>
+            <span className="mx-2" aria-hidden="true">/</span>
             <span className="text-white">{town.name}, NJ</span>
           </nav>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -64,9 +75,9 @@ export default async function TownPage({ params }: Props) {
                 Free estimates, same-day service, and flawless results guaranteed.
               </p>
               <div className="flex flex-wrap gap-4 text-sm text-gray-300 mb-8">
-                <span>✅ Free Estimates</span>
-                <span>✅ Same-Day Service</span>
-                <span>✅ Serving {town.name} {town.zip}</span>
+                <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Free Estimates</span>
+                <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Same-Day Service</span>
+                <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Serving {town.name} {town.zip}</span>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href={`tel:${BUSINESS.phone}`} className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-center text-lg">
@@ -96,7 +107,7 @@ export default async function TownPage({ params }: Props) {
                 href={`/services/${service.slug}`}
                 className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-orange/30 transition-all"
               >
-                <div className="text-3xl mb-3">{service.icon}</div>
+                <div className="text-3xl mb-3" aria-hidden="true">{service.icon}</div>
                 <h3 className="text-lg font-bold text-navy group-hover:text-orange transition-colors mb-2">
                   {service.title} in {town.name}
                 </h3>
@@ -133,7 +144,7 @@ export default async function TownPage({ params }: Props) {
               </div>
             </div>
             <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
-              <div className="text-orange text-lg mb-3">★★★★★</div>
+              <div className="text-orange text-lg mb-3" aria-label="5 out of 5 stars">★★★★★</div>
               <p className="text-gray-700 leading-relaxed italic mb-4">&ldquo;{relevantTestimonial.text}&rdquo;</p>
               <p className="font-bold text-navy">{relevantTestimonial.name}</p>
               <p className="text-sm text-gray-500">{relevantTestimonial.location}</p>
@@ -170,21 +181,25 @@ export default async function TownPage({ params }: Props) {
           __html: JSON.stringify([
             {
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
+              "@type": "HomeAndConstructionBusiness",
+              "@id": "https://www.bergencountypatchboys.com/#business",
               name: `${BUSINESS.name} - ${town.name}`,
               description: `Professional drywall repair services in ${town.name}, NJ ${town.zip}`,
               url: `https://www.bergencountypatchboys.com/areas/${town.slug}/`,
               telephone: BUSINESS.phone,
               email: BUSINESS.email,
               image: "https://www.bergencountypatchboys.com/logo.png",
-              areaServed: {
-                "@type": "City",
-                name: town.name,
-                containedInPlace: {
-                  "@type": "County",
-                  name: "Bergen County",
+              priceRange: "$$",
+              areaServed: [
+                {
+                  "@type": "City",
+                  name: town.name,
+                  containedInPlace: {
+                    "@type": "AdministrativeArea",
+                    name: "Bergen County, New Jersey",
+                  },
                 },
-              },
+              ],
               address: {
                 "@type": "PostalAddress",
                 addressLocality: town.name,

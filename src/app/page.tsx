@@ -292,19 +292,29 @@ export default function HomePage() {
               longitude: -74.1169,
             },
             areaServed: {
-              "@type": "County",
-              name: "Bergen County",
-              containedInPlace: {
-                "@type": "State",
-                name: "New Jersey",
-              },
+              "@type": "AdministrativeArea",
+              name: "Bergen County, New Jersey",
             },
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "4.9",
               reviewCount: "47",
               bestRating: "5",
+              worstRating: "1",
             },
+            review: TESTIMONIALS.slice(0, 3).map((t) => ({
+              "@type": "Review",
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: t.rating,
+                bestRating: 5,
+              },
+              author: {
+                "@type": "Person",
+                name: t.name,
+              },
+              reviewBody: t.text,
+            })),
             openingHoursSpecification: [
               {
                 "@type": "OpeningHoursSpecification",
@@ -319,9 +329,9 @@ export default function HomePage() {
                 closes: "15:00",
               },
             ],
-            serviceType: SERVICES.map((s) => s.title),
             priceRange: "$$",
             paymentAccepted: "Cash, Credit Card, Check",
+            currenciesAccepted: "USD",
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Drywall Repair Services",
@@ -331,6 +341,7 @@ export default function HomePage() {
                   "@type": "Service",
                   name: s.title,
                   description: s.shortDesc,
+                  url: `https://www.bergencountypatchboys.com/services/${s.slug}/`,
                 },
               })),
             },

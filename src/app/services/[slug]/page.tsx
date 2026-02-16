@@ -14,15 +14,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = SERVICES.find((s) => s.slug === slug);
   if (!service) return {};
+  const pageTitle = `${service.title} Bergen County NJ | Patch Boys`;
+  const pageDesc = `Professional ${service.title.toLowerCase()} services in Bergen County, New Jersey. ${service.shortDesc} Free estimates available.`;
   return {
-    title: `${service.title} in Bergen County NJ`,
-    description: `Professional ${service.title.toLowerCase()} services in Bergen County, New Jersey. ${service.shortDesc} Free estimates available.`,
+    title: { absolute: pageTitle },
+    description: pageDesc,
     keywords: service.keywords,
     alternates: {
       canonical: `/services/${slug}/`,
     },
     openGraph: {
-      title: `${service.title} in Bergen County NJ`,
+      title: pageTitle,
+      description: `Professional ${service.title.toLowerCase()} services in Bergen County, NJ. ${service.shortDesc}`,
+      url: `https://www.bergencountypatchboys.com/services/${slug}/`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
       description: `Professional ${service.title.toLowerCase()} services in Bergen County, NJ. ${service.shortDesc}`,
     },
   };
@@ -149,8 +158,10 @@ export default async function ServicePage({ params }: Props) {
               "@type": "Service",
               name: `${service.title} in Bergen County, NJ`,
               description: service.longDesc,
+              url: `https://www.bergencountypatchboys.com/services/${slug}/`,
               provider: {
-                "@type": "LocalBusiness",
+                "@type": "HomeAndConstructionBusiness",
+                "@id": "https://www.bergencountypatchboys.com/#business",
                 name: BUSINESS.name,
                 telephone: BUSINESS.phone,
                 address: {
@@ -162,9 +173,8 @@ export default async function ServicePage({ params }: Props) {
                 },
               },
               areaServed: {
-                "@type": "County",
-                name: "Bergen County",
-                containedInPlace: { "@type": "State", name: "New Jersey" },
+                "@type": "AdministrativeArea",
+                name: "Bergen County, New Jersey",
               },
             },
             {
