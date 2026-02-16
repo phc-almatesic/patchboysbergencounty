@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BUSINESS } from "@/lib/data";
+import TrackedLink from "@/components/TrackedLink";
+import TrackedCTA from "@/components/TrackedCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -116,12 +118,22 @@ export default function AboutPage() {
             Request your free estimate today and see why Bergen County homeowners trust The Patch Boys.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg">
+            <TrackedCTA
+              href="/contact"
+              event="cta_click"
+              params={{ button_text: "Request Free Estimate", location: "about_page_bottom" }}
+              className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg"
+            >
               Request Free Estimate
-            </Link>
-            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg">
+            </TrackedCTA>
+            <TrackedLink
+              href={`tel:${BUSINESS.phone}`}
+              event="phone_click"
+              params={{ location: "about_page_bottom" }}
+              className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg"
+            >
               Call {BUSINESS.phone}
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>

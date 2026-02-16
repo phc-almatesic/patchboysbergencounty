@@ -1,8 +1,9 @@
 "use client";
 
 import Script from "next/script";
+import { trackEvent } from "@/lib/tracking";
 
-const GTM_ID = "GTM-NQGXKB2R";
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-NQGXKB2R";
 
 export function GTMHead() {
   return (
@@ -31,14 +32,6 @@ export function GTMBody() {
   );
 }
 
-// Helper to push events to dataLayer
-export function pushEvent(event: string, data?: Record<string, string>) {
-  if (typeof window !== "undefined") {
-    (window as unknown as { dataLayer: Record<string, unknown>[] }).dataLayer =
-      (window as unknown as { dataLayer: Record<string, unknown>[] }).dataLayer || [];
-    (window as unknown as { dataLayer: Record<string, unknown>[] }).dataLayer.push({
-      event,
-      ...data,
-    });
-  }
-}
+// Re-export for backward compatibility — all new code should import
+// directly from @/lib/tracking.
+export const pushEvent = trackEvent;

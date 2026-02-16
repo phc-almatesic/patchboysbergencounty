@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { BUSINESS, SERVICES, BERGEN_TOWNS } from "@/lib/data";
+import { trackEvent } from "@/lib/tracking";
 
 export default function Footer() {
   const topTowns = BERGEN_TOWNS.slice(0, 12);
@@ -20,12 +23,14 @@ export default function Footer() {
             <Link
               href="/contact"
               className="bg-white text-orange font-bold px-8 py-4 rounded-lg hover:bg-gray-100 focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg shadow-lg"
+              onClick={() => trackEvent("cta_click", { button_text: "Request Free Estimate", location: "footer_banner" })}
             >
               Request Free Estimate
             </Link>
             <a
               href={`tel:${BUSINESS.phone}`}
               className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg shadow-lg"
+              onClick={() => trackEvent("phone_click", { location: "footer_banner" })}
             >
               Call {BUSINESS.phone}
             </a>
@@ -48,6 +53,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-white/10 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
+              onClick={() => trackEvent("external_link_click", { link_text: "Leave Us a Review", link_url: "google_reviews", location: "footer" })}
             >
               Leave Us a Review
             </a>
@@ -59,7 +65,9 @@ export default function Footer() {
             <ul className="space-y-2">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="text-gray-300 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors text-sm">
+                  <Link href={`/services/${s.slug}`} className="text-gray-300 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors text-sm"
+                    onClick={() => trackEvent("footer_nav_click", { link_text: s.title, section: "services" })}
+                  >
                     {s.title}
                   </Link>
                 </li>
@@ -73,7 +81,9 @@ export default function Footer() {
             <ul className="space-y-2">
               {topTowns.map((t) => (
                 <li key={t.slug}>
-                  <Link href={`/areas/${t.slug}`} className="text-gray-300 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors text-sm">
+                  <Link href={`/areas/${t.slug}`} className="text-gray-300 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors text-sm"
+                    onClick={() => trackEvent("footer_nav_click", { link_text: t.name, section: "service_areas" })}
+                  >
                     {t.name}, NJ
                   </Link>
                 </li>
@@ -92,11 +102,15 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-gray-300">
               <p>
                 <strong className="text-white">Phone:</strong><br />
-                <a href={`tel:${BUSINESS.phone}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">{BUSINESS.phone}</a>
+                <a href={`tel:${BUSINESS.phone}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors"
+                  onClick={() => trackEvent("phone_click", { location: "footer_contact" })}
+                >{BUSINESS.phone}</a>
               </p>
               <p>
                 <strong className="text-white">Email:</strong><br />
-                <a href={`mailto:${BUSINESS.email}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">{BUSINESS.email}</a>
+                <a href={`mailto:${BUSINESS.email}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors"
+                  onClick={() => trackEvent("email_click", { location: "footer_contact" })}
+                >{BUSINESS.email}</a>
               </p>
               <p>
                 <strong className="text-white">Service Area:</strong><br />
@@ -110,6 +124,7 @@ export default function Footer() {
             <Link
               href="/contact"
               className="inline-block mt-4 bg-orange text-white font-bold px-6 py-3 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-sm"
+              onClick={() => trackEvent("cta_click", { button_text: "Get Free Estimate", location: "footer_contact" })}
             >
               Get Free Estimate
             </Link>

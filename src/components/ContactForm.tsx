@@ -1,13 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { BUSINESS, BERGEN_TOWNS } from "@/lib/data";
-import { pushEvent } from "./TrackingProvider";
+import { trackEvent } from "@/lib/tracking";
 
 export default function ContactForm({ variant = "full" }: { variant?: "full" | "compact" }) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
+  const formStartedRef = useRef(false);
+
+  const handleFormStart = () => {
+    if (!formStartedRef.current) {
+      formStartedRef.current = true;
+      trackEvent("form_start", {
+        form_type: variant === "full" ? "contact_page" : "inline_hero",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,16 +36,24 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       if (res.ok) {
         setSubmitted(true);
-        pushEvent("form_submitted", {
+        trackEvent("form_submit", {
           form_type: variant === "full" ? "contact_page" : "inline_hero",
           service: data.get("service")?.toString() || "",
           town: data.get("town")?.toString() || "",
         });
       } else {
         setError(true);
+        trackEvent("form_error", {
+          form_type: variant === "full" ? "contact_page" : "inline_hero",
+          error_type: "server_error",
+        });
       }
     } catch {
       setError(true);
+      trackEvent("form_error", {
+        form_type: variant === "full" ? "contact_page" : "inline_hero",
+        error_type: "network_error",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -44,12 +62,16 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
   if (submitted) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
-        <div className="text-5xl mb-4">✅</div>
+        <div className="text-5xl mb-4">&#x2705;</div>
         <h3 className="text-2xl font-bold text-green-800 mb-2">Thank You!</h3>
         <p className="text-green-700">
           We&apos;ve received your request and will contact you within 1 business hour.
           For immediate assistance, call us at{" "}
-          <a href={`tel:${BUSINESS.phone}`} className="font-bold underline">{BUSINESS.phone}</a>
+          <a
+            href={`tel:${BUSINESS.phone}`}
+            className="font-bold underline"
+            onClick={() => trackEvent("phone_click", { location: "form_thank_you" })}
+          >{BUSINESS.phone}</a>
         </p>
       </div>
     );
@@ -63,7 +85,11 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center text-red-700" role="alert" aria-live="assertive">
           Something went wrong. Please try again or call us at{" "}
-          <a href={`tel:${BUSINESS.phone}`} className="font-bold underline focus:outline-2 focus:outline-offset-2 focus:outline-red-700">{BUSINESS.phone}</a>
+          <a
+            href={`tel:${BUSINESS.phone}`}
+            className="font-bold underline focus:outline-2 focus:outline-offset-2 focus:outline-red-700"
+            onClick={() => trackEvent("phone_click", { location: "form_error" })}
+          >{BUSINESS.phone}</a>
         </div>
       )}
 
@@ -77,6 +103,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
             required
             placeholder="John Smith"
             aria-required="true"
+            onFocus={handleFormStart}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
           />
         </div>
@@ -89,6 +116,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
             required
             placeholder="(201) 555-0199"
             aria-required="true"
+            onFocus={handleFormStart}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
           />
         </div>
@@ -104,6 +132,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
             required
             placeholder="john@example.com"
             aria-required="true"
+            onFocus={handleFormStart}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
           />
         </div>
@@ -114,6 +143,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
             name="town"
             required
             aria-required="true"
+            onFocus={handleFormStart}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white"
           >
             <option value="">Select your town...</option>
@@ -127,7 +157,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       <div>
         <label htmlFor="contact-service" className="block text-sm font-semibold text-gray-700 mb-1">Service Needed</label>
-        <select id="contact-service" name="service" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white">
+        <select id="contact-service" name="service" onFocus={handleFormStart} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white">
           <option value="">Select a service...</option>
           <option value="drywall-repair">Drywall Repair</option>
           <option value="ceiling-repair">Ceiling Repair</option>
@@ -149,6 +179,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
               name="message"
               rows={4}
               placeholder="Tell us about your drywall repair needs, the number of holes/areas to fix, and any other details..."
+              onFocus={handleFormStart}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all resize-y"
             />
           </div>
@@ -176,6 +207,10 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
                   if (label && files && files.length > 0) {
                     const span = label.querySelector("span");
                     if (span) span.textContent = `${files.length} photo${files.length > 1 ? "s" : ""} selected`;
+                    trackEvent("form_photo_upload", {
+                      form_type: variant,
+                      photo_count: String(files.length),
+                    });
                   }
                 }}
               />
@@ -190,7 +225,7 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
         className="w-full bg-orange text-white font-bold py-4 px-8 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors shadow-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
         aria-busy={submitting}
       >
-        {submitting ? "Sending..." : "Get My Free Estimate →"}
+        {submitting ? "Sending..." : "Get My Free Estimate \u2192"}
       </button>
 
       <p className="text-xs text-gray-500 text-center">

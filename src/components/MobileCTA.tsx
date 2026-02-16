@@ -1,7 +1,7 @@
 "use client";
 
 import { BUSINESS } from "@/lib/data";
-import { pushEvent } from "./TrackingProvider";
+import { trackEvent } from "@/lib/tracking";
 
 export default function MobileCTA() {
   return (
@@ -9,15 +9,15 @@ export default function MobileCTA() {
       <a
         href={`tel:${BUSINESS.phone}`}
         className="flex-1 bg-navy text-white font-bold py-3 rounded-lg text-center text-sm hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-navy transition-colors"
-        onClick={() => pushEvent("phone_click", { location: "mobile_sticky_bar" })}
+        onClick={() => trackEvent("phone_click", { location: "mobile_sticky_bar" })}
         aria-label={`Call us at ${BUSINESS.phone}`}
       >
-        📞 Call Now
+        Call Now
       </a>
       <a
         href="/contact"
         className="flex-1 bg-orange text-white font-bold py-3 rounded-lg text-center text-sm hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
-        onClick={() => pushEvent("cta_clicked", { button_text: "Free Estimate", location: "mobile_sticky_bar" })}
+        onClick={() => trackEvent("cta_click", { button_text: "Free Estimate", location: "mobile_sticky_bar" })}
       >
         Free Estimate
       </a>

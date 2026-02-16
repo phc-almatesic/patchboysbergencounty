@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SERVICES, BUSINESS } from "@/lib/data";
 import ServiceImage from "@/components/ServiceImage";
+import TrackedLink from "@/components/TrackedLink";
+import TrackedCTA from "@/components/TrackedCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -68,12 +70,14 @@ export default function ServicesPage() {
                     >
                       Learn More
                     </Link>
-                    <Link
+                    <TrackedCTA
                       href="/contact"
+                      event="cta_click"
+                      params={{ button_text: "Get Free Estimate", location: "services_page", service: service.title }}
                       className="inline-block bg-orange text-white font-bold px-8 py-3 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
                     >
                       Get Free Estimate
-                    </Link>
+                    </TrackedCTA>
                   </div>
                 </div>
                 <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
@@ -93,12 +97,22 @@ export default function ServicesPage() {
             No problem! Request a free estimate and our expert technicians will assess your situation and recommend the right solution.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg">
+            <TrackedCTA
+              href="/contact"
+              event="cta_click"
+              params={{ button_text: "Request Free Estimate", location: "services_page_bottom" }}
+              className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg"
+            >
               Request Free Estimate
-            </Link>
-            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg">
+            </TrackedCTA>
+            <TrackedLink
+              href={`tel:${BUSINESS.phone}`}
+              event="phone_click"
+              params={{ location: "services_page_bottom" }}
+              className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg"
+            >
               Call {BUSINESS.phone}
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>

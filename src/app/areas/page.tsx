@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { BERGEN_TOWNS, SERVICES, BUSINESS } from "@/lib/data";
+import { BERGEN_TOWNS, BUSINESS } from "@/lib/data";
+import TrackedLink from "@/components/TrackedLink";
+import TrackedCTA from "@/components/TrackedCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -62,12 +64,22 @@ export default function AreasPage() {
             We serve all of Bergen County! If your town isn&apos;t listed, we still come to you. Call us or request an estimate online.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-lg">
+            <TrackedCTA
+              href="/contact"
+              event="cta_click"
+              params={{ button_text: "Request Free Estimate", location: "areas_page_bottom" }}
+              className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-lg"
+            >
               Request Free Estimate
-            </Link>
-            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light transition-colors text-lg">
+            </TrackedCTA>
+            <TrackedLink
+              href={`tel:${BUSINESS.phone}`}
+              event="phone_click"
+              params={{ location: "areas_page_bottom" }}
+              className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light transition-colors text-lg"
+            >
               Call {BUSINESS.phone}
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>

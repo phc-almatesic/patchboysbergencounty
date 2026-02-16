@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BUSINESS, SERVICES, BERGEN_TOWNS, TESTIMONIALS, FAQ } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
 import PhoneLink from "@/components/PhoneLink";
+import TrackedCTA from "@/components/TrackedCTA";
 
 function HeroSection() {
   return (
@@ -24,12 +25,14 @@ function HeroSection() {
               Holes, cracks, water damage — we fix it all. Professional drywall repairs with free estimates, same-day service, and results so seamless you&apos;ll forget there was ever damage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Link
+              <TrackedCTA
                 href="/contact"
+                event="cta_click"
+                params={{ button_text: "Get Your Free Estimate", location: "hero" }}
                 className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg shadow-lg text-center"
               >
                 Get Your Free Estimate
-              </Link>
+              </TrackedCTA>
               <PhoneLink
                 location="hero"
                 className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg text-center"

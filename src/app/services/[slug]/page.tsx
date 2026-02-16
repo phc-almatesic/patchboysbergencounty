@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SERVICES, BUSINESS, BERGEN_TOWNS } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
+import TrackedLink from "@/components/TrackedLink";
+import TrackedCTA from "@/components/TrackedCTA";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -64,12 +66,22 @@ export default async function ServicePage({ params }: Props) {
               </h1>
               <p className="text-xl text-gray-300 mb-8">{service.shortDesc}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-center">
+                <TrackedCTA
+                  href="/contact"
+                  event="cta_click"
+                  params={{ button_text: "Get Free Estimate", location: "service_detail_hero", service: service.title }}
+                  className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-center"
+                >
                   Get Free Estimate
-                </Link>
-                <a href={`tel:${BUSINESS.phone}`} className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-center">
+                </TrackedCTA>
+                <TrackedLink
+                  href={`tel:${BUSINESS.phone}`}
+                  event="phone_click"
+                  params={{ location: "service_detail_hero", service: service.title }}
+                  className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-center"
+                >
                   Call {BUSINESS.phone}
-                </a>
+                </TrackedLink>
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-2xl p-6">
@@ -139,9 +151,14 @@ export default async function ServicePage({ params }: Props) {
               <div className="bg-orange rounded-xl p-6 text-white text-center">
                 <h3 className="text-xl font-bold mb-2">Need Help Now?</h3>
                 <p className="text-white/90 mb-4 text-sm">Call for same-day service</p>
-                <a href={`tel:${BUSINESS.phone}`} className="block bg-white text-orange font-bold py-3 rounded-lg hover:bg-gray-100 focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors">
+                <TrackedLink
+                  href={`tel:${BUSINESS.phone}`}
+                  event="phone_click"
+                  params={{ location: "service_detail_sidebar", service: service.title }}
+                  className="block bg-white text-orange font-bold py-3 rounded-lg hover:bg-gray-100 focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
+                >
                   {BUSINESS.phone}
-                </a>
+                </TrackedLink>
               </div>
             </div>
           </div>

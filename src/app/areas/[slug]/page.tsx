@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BERGEN_TOWNS, SERVICES, BUSINESS, TESTIMONIALS } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
+import TrackedLink from "@/components/TrackedLink";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -80,9 +81,14 @@ export default async function TownPage({ params }: Props) {
                 <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Serving {town.name} {town.zip}</span>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href={`tel:${BUSINESS.phone}`} className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-center text-lg">
+                <TrackedLink
+                  href={`tel:${BUSINESS.phone}`}
+                  event="phone_click"
+                  params={{ location: "area_detail_hero", area: town.name }}
+                  className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-center text-lg"
+                >
                   Call {BUSINESS.phone}
-                </a>
+                </TrackedLink>
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-2xl p-6">

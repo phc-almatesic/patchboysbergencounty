@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { BUSINESS } from "@/lib/data";
+import TrackedLink from "@/components/TrackedLink";
+import TrackedCTA from "@/components/TrackedCTA";
+import NotFoundTracker from "@/components/NotFoundTracker";
 
 export default function NotFound() {
   return (
     <section className="py-24 md:py-32">
+      <NotFoundTracker />
       <div className="max-w-2xl mx-auto px-4 text-center">
-        <div className="text-8xl mb-6">🕳️</div>
+        <div className="text-8xl mb-6">&#x1F573;&#xFE0F;</div>
         <h1 className="text-5xl md:text-6xl font-bold text-navy mb-4">404</h1>
         <h2 className="text-2xl md:text-3xl font-bold text-navy mb-4">
           Looks Like This Page Has a Hole in It
@@ -23,18 +27,25 @@ export default function NotFound() {
           >
             Back to Home
           </Link>
-          <Link
+          <TrackedCTA
             href="/contact"
+            event="cta_click"
+            params={{ button_text: "Get a Free Estimate", location: "404_page" }}
             className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light transition-colors text-lg"
           >
             Get a Free Estimate
-          </Link>
+          </TrackedCTA>
         </div>
         <div className="bg-gray-warm rounded-xl p-6 inline-block">
           <p className="text-gray-600 text-sm mb-1">Got a real hole that needs fixing?</p>
-          <a href={`tel:${BUSINESS.phone}`} className="text-orange font-bold text-lg hover:underline">
+          <TrackedLink
+            href={`tel:${BUSINESS.phone}`}
+            event="phone_click"
+            params={{ location: "404_page" }}
+            className="text-orange font-bold text-lg hover:underline"
+          >
             Call {BUSINESS.phone}
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </section>

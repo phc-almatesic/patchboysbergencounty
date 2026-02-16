@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCTA from "@/components/MobileCTA";
+import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import { GTMHead, GTMBody } from "@/components/TrackingProvider";
 import { BUSINESS } from "@/lib/data";
 
@@ -64,6 +65,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/logo.png" />
+        {/* Initialise dataLayer before GTM to prevent race conditions */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "window.dataLayer=window.dataLayer||[];",
+          }}
+        />
         <GTMHead />
       </head>
       <body className="min-h-screen flex flex-col">
@@ -81,6 +88,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <MobileCTA />
+        <ScrollDepthTracker />
       </body>
     </html>
   );

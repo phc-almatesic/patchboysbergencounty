@@ -1,6 +1,7 @@
 import { BUSINESS } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
 import GoogleMap from "@/components/GoogleMap";
+import TrackedLink from "@/components/TrackedLink";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,13 +53,15 @@ export default function ContactPage() {
               <div className="bg-orange rounded-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-4">Prefer to Call?</h3>
                 <p className="text-white/90 mb-4">Speak with us directly for immediate assistance or to schedule your free estimate.</p>
-                <a
+                <TrackedLink
                   href={`tel:${BUSINESS.phone}`}
+                  event="phone_click"
+                  params={{ location: "contact_sidebar_cta" }}
                   className="block bg-white text-orange font-bold py-4 rounded-lg text-center text-lg hover:bg-gray-100 focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors"
                   aria-label={`Call us at ${BUSINESS.phone}`}
                 >
-                  📞 {BUSINESS.phone}
-                </a>
+                  {BUSINESS.phone}
+                </TrackedLink>
               </div>
 
               <div className="bg-navy rounded-xl p-6 text-white">
@@ -66,11 +69,25 @@ export default function ContactPage() {
                 <div className="space-y-3 text-sm">
                   <p>
                     <strong>Phone:</strong><br />
-                    <a href={`tel:${BUSINESS.phone}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">{BUSINESS.phone}</a>
+                    <TrackedLink
+                      href={`tel:${BUSINESS.phone}`}
+                      event="phone_click"
+                      params={{ location: "contact_sidebar_info" }}
+                      className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors"
+                    >
+                      {BUSINESS.phone}
+                    </TrackedLink>
                   </p>
                   <p>
                     <strong>Email:</strong><br />
-                    <a href={`mailto:${BUSINESS.email}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">{BUSINESS.email}</a>
+                    <TrackedLink
+                      href={`mailto:${BUSINESS.email}`}
+                      event="email_click"
+                      params={{ location: "contact_sidebar" }}
+                      className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors"
+                    >
+                      {BUSINESS.email}
+                    </TrackedLink>
                   </p>
                   <p>
                     <strong>Hours:</strong><br />
