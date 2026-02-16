@@ -38,7 +38,9 @@ export default function ServicesPage() {
               >
                 <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="text-5xl mb-4">{service.icon}</div>
-                  <h2 className="text-3xl font-bold text-navy mb-4">{service.title}</h2>
+                  <Link href={`/services/${service.slug}`}>
+                    <h2 className="text-3xl font-bold text-navy mb-4 hover:text-orange transition-colors">{service.title}</h2>
+                  </Link>
                   <p className="text-gray-600 leading-relaxed mb-6">{service.longDesc}</p>
                   <ul className="space-y-2 mb-6">
                     {service.benefits.map((b) => (
@@ -48,12 +50,20 @@ export default function ServicesPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    href="/contact"
-                    className="inline-block bg-orange text-white font-bold px-8 py-3 rounded-lg hover:bg-orange-dark transition-colors"
-                  >
-                    Get a Free {service.title} Estimate
-                  </Link>
+                  <div className="flex flex-wrap gap-4">
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-block bg-navy text-white font-bold px-8 py-3 rounded-lg hover:bg-navy-light transition-colors"
+                    >
+                      Learn More
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="inline-block bg-orange text-white font-bold px-8 py-3 rounded-lg hover:bg-orange-dark transition-colors"
+                    >
+                      Get Free Estimate
+                    </Link>
+                  </div>
                 </div>
                 <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
                   <ServiceImage service={service.slug} size="large" />

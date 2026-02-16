@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BUSINESS } from "@/lib/data";
+import { BUSINESS, SERVICES } from "@/lib/data";
 import { pushEvent } from "./TrackingProvider";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
     <>
@@ -35,9 +36,25 @@ export default function Header() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-8">
             <Link href="/" className="text-navy font-semibold hover:text-orange transition-colors">Home</Link>
-            <Link href="/services" className="text-navy font-semibold hover:text-orange transition-colors">Services</Link>
+            <div className="relative group">
+              <Link href="/services" className="text-navy font-semibold hover:text-orange transition-colors py-2">Services</Link>
+              <div className="absolute top-full left-0 pt-2 hidden group-hover:block">
+                <div className="bg-white border border-gray-200 rounded-xl shadow-lg py-2 w-56">
+                  {SERVICES.map((s) => (
+                    <Link key={s.slug} href={`/services/${s.slug}`} className="flex items-center gap-3 px-4 py-2.5 text-sm text-navy hover:bg-gray-warm hover:text-orange transition-colors">
+                      <span>{s.icon}</span>
+                      <span className="font-medium">{s.title}</span>
+                    </Link>
+                  ))}
+                  <div className="border-t border-gray-100 mt-1 pt-1">
+                    <Link href="/services" className="block px-4 py-2.5 text-sm text-orange font-semibold hover:bg-gray-warm transition-colors">
+                      View All Services
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
             <Link href="/areas" className="text-navy font-semibold hover:text-orange transition-colors">Service Areas</Link>
-            <Link href="/gallery" className="text-navy font-semibold hover:text-orange transition-colors">Gallery</Link>
             <Link href="/about" className="text-navy font-semibold hover:text-orange transition-colors">About</Link>
             <Link href="/contact" className="text-navy font-semibold hover:text-orange transition-colors">Contact</Link>
             <Link
@@ -65,9 +82,23 @@ export default function Header() {
           <div className="lg:hidden bg-white border-t shadow-lg">
             <nav className="flex flex-col p-4 gap-4">
               <Link href="/" className="text-navy font-semibold py-2" onClick={() => setMobileOpen(false)}>Home</Link>
-              <Link href="/services" className="text-navy font-semibold py-2" onClick={() => setMobileOpen(false)}>Services</Link>
+              <button onClick={() => setServicesOpen(!servicesOpen)} className="text-navy font-semibold py-2 text-left flex items-center justify-between">
+                Services
+                <span className={`text-xs transition-transform ${servicesOpen ? "rotate-180" : ""}`}>▼</span>
+              </button>
+              {servicesOpen && (
+                <div className="flex flex-col gap-1 pl-4 -mt-2">
+                  {SERVICES.map((s) => (
+                    <Link key={s.slug} href={`/services/${s.slug}`} className="text-gray-600 py-1.5 text-sm flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+                      <span>{s.icon}</span> {s.title}
+                    </Link>
+                  ))}
+                  <Link href="/services" className="text-orange font-semibold py-1.5 text-sm" onClick={() => setMobileOpen(false)}>
+                    View All Services
+                  </Link>
+                </div>
+              )}
               <Link href="/areas" className="text-navy font-semibold py-2" onClick={() => setMobileOpen(false)}>Service Areas</Link>
-              <Link href="/gallery" className="text-navy font-semibold py-2" onClick={() => setMobileOpen(false)}>Gallery</Link>
               <Link href="/about" className="text-navy font-semibold py-2" onClick={() => setMobileOpen(false)}>About</Link>
               <Link href="/contact" className="text-navy font-semibold py-2" onClick={() => setMobileOpen(false)}>Contact</Link>
               <Link
