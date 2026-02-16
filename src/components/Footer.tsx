@@ -6,7 +6,7 @@ export default function Footer() {
   const topTowns = BERGEN_TOWNS.slice(0, 12);
 
   return (
-    <footer className="bg-navy-dark text-white">
+    <footer className="bg-navy-dark text-white pb-16 lg:pb-0">
       {/* CTA banner */}
       <div className="bg-orange py-10">
         <div className="max-w-7xl mx-auto px-4 text-center">
@@ -42,7 +42,15 @@ export default function Footer() {
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
               {BUSINESS.description}
             </p>
-            <p className="text-gray-400 text-sm">{BUSINESS.hours}</p>
+            <p className="text-gray-400 text-sm mb-4">{BUSINESS.hours}</p>
+            <a
+              href="https://www.google.com/search?q=The+Patch+Boys+of+Bergen+County+NJ+reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white/10 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-orange transition-colors"
+            >
+              Leave Us a Review
+            </a>
           </div>
 
           {/* Services */}
@@ -94,6 +102,10 @@ export default function Footer() {
                 <strong className="text-white">Service Area:</strong><br />
                 Bergen County, New Jersey
               </p>
+              <p>
+                <strong className="text-white">Hours:</strong><br />
+                {BUSINESS.hours}
+              </p>
             </div>
             <Link
               href="/contact"
@@ -109,7 +121,13 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</p>
-          <p>A BELFOR Franchise Group Company</p>
+          <div className="flex items-center gap-4">
+            <Link href="/about" className="hover:text-orange transition-colors">About</Link>
+            <span className="text-white/20">|</span>
+            <Link href="/contact" className="hover:text-orange transition-colors">Contact</Link>
+            <span className="text-white/20">|</span>
+            <span>A BELFOR Franchise Group Company</span>
+          </div>
         </div>
       </div>
     </footer>

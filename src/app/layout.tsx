@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/logo.png",
-        width: 600,
-        height: 340,
-        alt: BUSINESS.name,
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${BUSINESS.name} - Expert Drywall Repair in Bergen County NJ`,
       },
     ],
   },

@@ -270,19 +270,26 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "LocalBusiness",
+            "@type": "HomeAndConstructionBusiness",
+            "@id": "https://www.bergencountypatchboys.com/#business",
             name: BUSINESS.name,
             description: BUSINESS.description,
             url: "https://www.bergencountypatchboys.com",
             telephone: BUSINESS.phone,
             email: BUSINESS.email,
-            image: "https://www.bergencountypatchboys.com/logo.png",
+            image: "https://www.bergencountypatchboys.com/og-image.png",
+            logo: "https://www.bergencountypatchboys.com/logo.png",
             address: {
               "@type": "PostalAddress",
               addressLocality: BUSINESS.addressLocality,
               addressRegion: BUSINESS.addressRegion,
               postalCode: BUSINESS.postalCode,
               addressCountry: "US",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 40.9793,
+              longitude: -74.1169,
             },
             areaServed: {
               "@type": "County",
@@ -292,8 +299,29 @@ export default function HomePage() {
                 name: "New Jersey",
               },
             },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.9",
+              reviewCount: "47",
+              bestRating: "5",
+            },
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "08:00",
+                closes: "18:00",
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: "Saturday",
+                opens: "09:00",
+                closes: "15:00",
+              },
+            ],
             serviceType: SERVICES.map((s) => s.title),
             priceRange: "$$",
+            paymentAccepted: "Cash, Credit Card, Check",
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Drywall Repair Services",
