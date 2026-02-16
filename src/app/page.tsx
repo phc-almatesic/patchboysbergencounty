@@ -26,22 +26,22 @@ function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link
                 href="/contact"
-                className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-lg shadow-lg text-center"
+                className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg shadow-lg text-center"
               >
                 Get Your Free Estimate
               </Link>
               <PhoneLink
                 location="hero"
-                className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy transition-colors text-lg text-center"
+                className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg text-center"
               >
                 📞 {BUSINESS.phone}
               </PhoneLink>
             </div>
             <div className="flex flex-wrap gap-6 text-sm text-gray-300">
-              <span className="flex items-center gap-2">✅ Free Estimates</span>
-              <span className="flex items-center gap-2">✅ Same-Day Service</span>
-              <span className="flex items-center gap-2">✅ Fully Insured</span>
-              <span className="flex items-center gap-2">✅ Satisfaction Guaranteed</span>
+              <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Free Estimates</span>
+              <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Same-Day Service</span>
+              <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Fully Insured</span>
+              <span className="flex items-center gap-2"><span aria-hidden="true">✅</span> Satisfaction Guaranteed</span>
             </div>
           </div>
           <div className="bg-white rounded-2xl shadow-2xl p-6 lg:p-8">
@@ -69,7 +69,7 @@ function TrustBar() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <div className="text-3xl font-bold text-orange">{stat.number}</div>
+              <div className="text-3xl font-bold text-orange" aria-label={`${stat.number} ${stat.label}`}>{stat.number}</div>
               <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
             </div>
           ))}
@@ -96,16 +96,16 @@ function ServicesSection() {
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
-              className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl hover:border-orange/30 transition-all"
+              className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl hover:border-orange/30 focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-all"
             >
-              <div className="text-4xl mb-4">{service.icon}</div>
+              <div className="text-4xl mb-4" aria-hidden="true">{service.icon}</div>
               <h3 className="text-xl font-bold text-navy mb-2 group-hover:text-orange transition-colors">
                 {service.title}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
                 {service.shortDesc}
               </p>
-              <span className="text-orange font-semibold text-sm group-hover:underline">
+              <span className="text-orange font-semibold text-sm group-hover:underline" aria-hidden="true">
                 Learn more →
               </span>
             </Link>
@@ -147,7 +147,7 @@ function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step) => (
             <div key={step.num} className="text-center">
-              <div className="w-16 h-16 bg-orange text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+              <div className="w-16 h-16 bg-orange text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg" aria-label={`Step ${step.num}`}>
                 {step.num}
               </div>
               <h3 className="text-xl font-bold text-navy mb-2">{step.title}</h3>
@@ -176,7 +176,7 @@ function TestimonialsSection() {
           {TESTIMONIALS.map((t, i) => (
             <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-3">
-                <div className="text-orange text-lg">{"★".repeat(t.rating)}</div>
+                <div className="text-orange text-lg" aria-label={`${t.rating} out of 5 stars`}>{"★".repeat(t.rating)}</div>
                 {"source" in t && <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-1 rounded">{(t as { source: string }).source}</span>}
               </div>
               <p className="text-gray-700 leading-relaxed mb-4 italic">&ldquo;{t.text}&rdquo;</p>
@@ -210,15 +210,15 @@ function ServiceAreasPreview() {
             <Link
               key={town.slug}
               href={`/areas/${town.slug}`}
-              className="bg-white/10 hover:bg-orange text-white font-medium py-3 px-4 rounded-lg text-center text-sm transition-colors"
+              className="bg-white/10 hover:bg-orange text-white font-medium py-3 px-4 rounded-lg text-center text-sm focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors"
             >
               {town.name}
             </Link>
           ))}
         </div>
         <div className="text-center mt-8">
-          <Link href="/areas" className="text-orange font-semibold hover:underline text-lg">
-            View all {BERGEN_TOWNS.length} service areas →
+          <Link href="/areas" className="text-orange font-semibold hover:underline focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2 text-lg">
+            View all {BERGEN_TOWNS.length} service areas <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>
@@ -238,9 +238,9 @@ function FAQSection() {
         <div className="space-y-4">
           {FAQ.map((item, i) => (
             <details key={i} className="bg-white border border-gray-200 rounded-xl overflow-hidden group">
-              <summary className="px-6 py-4 font-semibold text-navy cursor-pointer hover:text-orange transition-colors list-none flex items-center justify-between">
+              <summary className="px-6 py-4 font-semibold text-navy cursor-pointer hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors list-none flex items-center justify-between rounded">
                 {item.q}
-                <span className="text-orange text-xl ml-4 group-open:rotate-45 transition-transform">+</span>
+                <span className="text-orange text-xl ml-4 group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
               </summary>
               <div className="px-6 pb-4 text-gray-600 leading-relaxed">
                 {item.a}

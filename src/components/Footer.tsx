@@ -6,7 +6,7 @@ export default function Footer() {
   const topTowns = BERGEN_TOWNS.slice(0, 12);
 
   return (
-    <footer className="bg-navy-dark text-white pb-16 lg:pb-0">
+    <footer className="bg-navy-dark text-white pb-16 lg:pb-0" role="contentinfo">
       {/* CTA banner */}
       <div className="bg-orange py-10">
         <div className="max-w-7xl mx-auto px-4 text-center">
@@ -19,13 +19,13 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-white text-orange font-bold px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors text-lg shadow-lg"
+              className="bg-white text-orange font-bold px-8 py-4 rounded-lg hover:bg-gray-100 focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg shadow-lg"
             >
               Request Free Estimate
             </Link>
             <a
               href={`tel:${BUSINESS.phone}`}
-              className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light transition-colors text-lg shadow-lg"
+              className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg shadow-lg"
             >
               Call {BUSINESS.phone}
             </a>
@@ -38,7 +38,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
           <div>
-            <Image src="/logo.png" alt="The Patch Boys" width={160} height={90} className="h-12 w-auto mb-4 brightness-0 invert" />
+            <Image src="/logo.png" alt="The Patch Boys of Bergen County" width={160} height={90} className="h-12 w-auto mb-4 brightness-0 invert" />
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
               {BUSINESS.description}
             </p>
@@ -47,7 +47,7 @@ export default function Footer() {
               href="https://www.google.com/search?q=The+Patch+Boys+of+Bergen+County+NJ+reviews"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white/10 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-orange transition-colors"
+              className="inline-block bg-white/10 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
             >
               Leave Us a Review
             </a>
@@ -59,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="text-gray-300 hover:text-orange transition-colors text-sm">
+                  <Link href={`/services/${s.slug}`} className="text-gray-300 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors text-sm">
                     {s.title}
                   </Link>
                 </li>
@@ -73,13 +73,13 @@ export default function Footer() {
             <ul className="space-y-2">
               {topTowns.map((t) => (
                 <li key={t.slug}>
-                  <Link href={`/areas/${t.slug}`} className="text-gray-300 hover:text-orange transition-colors text-sm">
+                  <Link href={`/areas/${t.slug}`} className="text-gray-300 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors text-sm">
                     {t.name}, NJ
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/areas" className="text-orange font-semibold text-sm hover:underline">
+                <Link href="/areas" className="text-orange font-semibold text-sm hover:underline focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1">
                   View all areas →
                 </Link>
               </li>
@@ -92,11 +92,11 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-gray-300">
               <p>
                 <strong className="text-white">Phone:</strong><br />
-                <a href={`tel:${BUSINESS.phone}`} className="hover:text-orange transition-colors">{BUSINESS.phone}</a>
+                <a href={`tel:${BUSINESS.phone}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">{BUSINESS.phone}</a>
               </p>
               <p>
                 <strong className="text-white">Email:</strong><br />
-                <a href={`mailto:${BUSINESS.email}`} className="hover:text-orange transition-colors">{BUSINESS.email}</a>
+                <a href={`mailto:${BUSINESS.email}`} className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">{BUSINESS.email}</a>
               </p>
               <p>
                 <strong className="text-white">Service Area:</strong><br />
@@ -109,7 +109,7 @@ export default function Footer() {
             </div>
             <Link
               href="/contact"
-              className="inline-block mt-4 bg-orange text-white font-bold px-6 py-3 rounded-lg hover:bg-orange-dark transition-colors text-sm"
+              className="inline-block mt-4 bg-orange text-white font-bold px-6 py-3 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-sm"
             >
               Get Free Estimate
             </Link>
@@ -122,10 +122,10 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/about" className="hover:text-orange transition-colors">About</Link>
-            <span className="text-white/20">|</span>
-            <Link href="/contact" className="hover:text-orange transition-colors">Contact</Link>
-            <span className="text-white/20">|</span>
+            <Link href="/about" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">About</Link>
+            <span className="text-white/20" aria-hidden="true">|</span>
+            <Link href="/contact" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">Contact</Link>
+            <span className="text-white/20" aria-hidden="true">|</span>
             <span>A BELFOR Franchise Group Company</span>
           </div>
         </div>

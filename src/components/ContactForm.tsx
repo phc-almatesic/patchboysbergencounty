@@ -61,30 +61,34 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
       {/* Honeypot field - hidden from real users, catches bots */}
       <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center text-red-700">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center text-red-700" role="alert" aria-live="assertive">
           Something went wrong. Please try again or call us at{" "}
-          <a href={`tel:${BUSINESS.phone}`} className="font-bold underline">{BUSINESS.phone}</a>
+          <a href={`tel:${BUSINESS.phone}`} className="font-bold underline focus:outline-2 focus:outline-offset-2 focus:outline-red-700">{BUSINESS.phone}</a>
         </div>
       )}
 
       <div className={variant === "full" ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-4"}>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
+          <label htmlFor="contact-name" className="block text-sm font-semibold text-gray-700 mb-1">Full Name <span className="text-red-600" aria-label="required">*</span></label>
           <input
+            id="contact-name"
             type="text"
             name="name"
             required
             placeholder="John Smith"
+            aria-required="true"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Phone Number *</label>
+          <label htmlFor="contact-phone" className="block text-sm font-semibold text-gray-700 mb-1">Phone Number <span className="text-red-600" aria-label="required">*</span></label>
           <input
+            id="contact-phone"
             type="tel"
             name="phone"
             required
             placeholder="(201) 555-0199"
+            aria-required="true"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
           />
         </div>
@@ -92,20 +96,24 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
 
       <div className={variant === "full" ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-4"}>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
+          <label htmlFor="contact-email" className="block text-sm font-semibold text-gray-700 mb-1">Email Address <span className="text-red-600" aria-label="required">*</span></label>
           <input
+            id="contact-email"
             type="email"
             name="email"
             required
             placeholder="john@example.com"
+            aria-required="true"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all"
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Town / City *</label>
+          <label htmlFor="contact-town" className="block text-sm font-semibold text-gray-700 mb-1">Town / City <span className="text-red-600" aria-label="required">*</span></label>
           <select
+            id="contact-town"
             name="town"
             required
+            aria-required="true"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white"
           >
             <option value="">Select your town...</option>
@@ -118,8 +126,8 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Service Needed</label>
-        <select name="service" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white">
+        <label htmlFor="contact-service" className="block text-sm font-semibold text-gray-700 mb-1">Service Needed</label>
+        <select id="contact-service" name="service" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange outline-none transition-all bg-white">
           <option value="">Select a service...</option>
           <option value="drywall-repair">Drywall Repair</option>
           <option value="ceiling-repair">Ceiling Repair</option>
@@ -135,8 +143,9 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
       {variant === "full" && (
         <>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Describe Your Project</label>
+            <label htmlFor="contact-message" className="block text-sm font-semibold text-gray-700 mb-1">Describe Your Project</label>
             <textarea
+              id="contact-message"
               name="message"
               rows={4}
               placeholder="Tell us about your drywall repair needs, the number of holes/areas to fix, and any other details..."
@@ -145,21 +154,22 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
+            <label htmlFor="contact-photos" className="block text-sm font-semibold text-gray-700 mb-1">
               Upload Photos of Your Damage <span className="text-gray-400 font-normal">(Optional)</span>
             </label>
-            <label className="flex flex-col items-center justify-center w-full px-4 py-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange hover:bg-orange-50 transition-all">
-              <svg className="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <label htmlFor="contact-photos" className="flex flex-col items-center justify-center w-full px-4 py-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange hover:bg-orange-50 focus-within:border-orange focus-within:bg-orange-50 transition-all">
+              <svg className="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span className="text-sm text-gray-600 font-medium">Tap to upload photos</span>
               <span className="text-xs text-gray-400 mt-1">Up to 4 images (JPG, PNG, HEIC)</span>
               <input
+                id="contact-photos"
                 type="file"
                 name="photos"
                 multiple
                 accept="image/jpeg,image/png,image/heic,image/heif"
-                className="hidden"
+                className="hidden focus:outline-2 focus:outline-offset-2 focus:outline-orange"
                 onChange={(e) => {
                   const label = e.target.closest("label");
                   const files = e.target.files;
@@ -177,7 +187,8 @@ export default function ContactForm({ variant = "full" }: { variant?: "full" | "
       <button
         type="submit"
         disabled={submitting}
-        className="w-full bg-orange text-white font-bold py-4 px-8 rounded-lg hover:bg-orange-dark transition-colors shadow-lg text-lg disabled:opacity-50"
+        className="w-full bg-orange text-white font-bold py-4 px-8 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors shadow-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-busy={submitting}
       >
         {submitting ? "Sending..." : "Get My Free Estimate →"}
       </button>

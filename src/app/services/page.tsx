@@ -37,15 +37,15 @@ export default function ServicesPage() {
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${idx % 2 === 1 ? "lg:direction-rtl" : ""}`}
               >
                 <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="text-5xl mb-4">{service.icon}</div>
-                  <Link href={`/services/${service.slug}`}>
+                  <div className="text-5xl mb-4" aria-hidden="true">{service.icon}</div>
+                  <Link href={`/services/${service.slug}`} className="focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded">
                     <h2 className="text-3xl font-bold text-navy mb-4 hover:text-orange transition-colors">{service.title}</h2>
                   </Link>
                   <p className="text-gray-600 leading-relaxed mb-6">{service.longDesc}</p>
                   <ul className="space-y-2 mb-6">
                     {service.benefits.map((b) => (
                       <li key={b} className="flex items-start gap-3">
-                        <span className="text-orange font-bold mt-0.5">✓</span>
+                        <span className="text-orange font-bold mt-0.5" aria-hidden="true">✓</span>
                         <span className="text-gray-700">{b}</span>
                       </li>
                     ))}
@@ -53,13 +53,13 @@ export default function ServicesPage() {
                   <div className="flex flex-wrap gap-4">
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-block bg-navy text-white font-bold px-8 py-3 rounded-lg hover:bg-navy-light transition-colors"
+                      className="inline-block bg-navy text-white font-bold px-8 py-3 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-navy transition-colors"
                     >
                       Learn More
                     </Link>
                     <Link
                       href="/contact"
-                      className="inline-block bg-orange text-white font-bold px-8 py-3 rounded-lg hover:bg-orange-dark transition-colors"
+                      className="inline-block bg-orange text-white font-bold px-8 py-3 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
                     >
                       Get Free Estimate
                     </Link>
@@ -82,10 +82,10 @@ export default function ServicesPage() {
             No problem! Request a free estimate and our expert technicians will assess your situation and recommend the right solution.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-lg">
+            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg">
               Request Free Estimate
             </Link>
-            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light transition-colors text-lg">
+            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg">
               Call {BUSINESS.phone}
             </a>
           </div>

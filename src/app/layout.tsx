@@ -59,8 +59,17 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <GTMBody />
+        {/* Skip to main content link for keyboard users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:bg-orange focus:text-white focus:px-4 focus:py-2 focus:outline-2 focus:outline-offset-2 focus:outline-white"
+        >
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1" id="main-content">
+          {children}
+        </main>
         <Footer />
         <MobileCTA />
       </body>

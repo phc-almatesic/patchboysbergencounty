@@ -67,7 +67,7 @@ export default function AboutPage() {
               },
             ].map((v) => (
               <div key={v.title} className="text-center p-6">
-                <div className="text-5xl mb-4">{v.icon}</div>
+                <div className="text-5xl mb-4" aria-hidden="true">{v.icon}</div>
                 <h3 className="text-xl font-bold text-navy mb-2">{v.title}</h3>
                 <p className="text-gray-600">{v.desc}</p>
               </div>
@@ -89,7 +89,7 @@ export default function AboutPage() {
                 "Serving all 70+ Bergen County communities",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
-                  <span className="text-orange text-xl">✓</span>
+                  <span className="text-orange text-xl" aria-hidden="true">✓</span>
                   <span className="text-white">{item}</span>
                 </div>
               ))}
@@ -105,10 +105,10 @@ export default function AboutPage() {
             Request your free estimate today and see why Bergen County homeowners trust The Patch Boys.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-lg">
+            <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-lg">
               Request Free Estimate
             </Link>
-            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light transition-colors text-lg">
+            <a href={`tel:${BUSINESS.phone}`} className="bg-navy text-white font-bold px-8 py-4 rounded-lg hover:bg-navy-light focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-lg">
               Call {BUSINESS.phone}
             </a>
           </div>

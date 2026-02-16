@@ -41,11 +41,11 @@ export default async function ServicePage({ params }: Props) {
       {/* Hero */}
       <section className="bg-navy py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <nav className="text-sm text-gray-400 mb-6">
-            <Link href="/" className="hover:text-orange">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/services" className="hover:text-orange">Services</Link>
-            <span className="mx-2">/</span>
+          <nav className="text-sm text-gray-400 mb-6" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1">Home</Link>
+            <span className="mx-2" aria-hidden="true">/</span>
+            <Link href="/services" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1">Services</Link>
+            <span className="mx-2" aria-hidden="true">/</span>
             <span className="text-white">{service.title}</span>
           </nav>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -55,10 +55,10 @@ export default async function ServicePage({ params }: Props) {
               </h1>
               <p className="text-xl text-gray-300 mb-8">{service.shortDesc}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark transition-colors text-center">
+                <Link href="/contact" className="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-dark focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors text-center">
                   Get Free Estimate
                 </Link>
-                <a href={`tel:${BUSINESS.phone}`} className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy transition-colors text-center">
+                <a href={`tel:${BUSINESS.phone}`} className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy focus:outline-2 focus:outline-offset-2 focus:outline-white transition-colors text-center">
                   Call {BUSINESS.phone}
                 </a>
               </div>
@@ -85,7 +85,7 @@ export default async function ServicePage({ params }: Props) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 {service.benefits.map((b) => (
                   <div key={b} className="flex items-start gap-3 bg-gray-warm p-4 rounded-lg">
-                    <span className="text-orange font-bold text-xl">✓</span>
+                    <span className="text-orange font-bold text-xl" aria-hidden="true">✓</span>
                     <span className="text-gray-700 font-medium">{b}</span>
                   </div>
                 ))}
@@ -102,12 +102,12 @@ export default async function ServicePage({ params }: Props) {
                   <Link
                     key={t.slug}
                     href={`/areas/${t.slug}`}
-                    className="bg-gray-warm text-navy font-medium px-3 py-1.5 rounded-lg text-sm hover:bg-orange hover:text-white transition-colors"
+                    className="bg-gray-warm text-navy font-medium px-3 py-1.5 rounded-lg text-sm hover:bg-orange hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-navy transition-colors"
                   >
                     {t.name}
                   </Link>
                 ))}
-                <Link href="/areas" className="text-orange font-semibold px-3 py-1.5 text-sm">+ more</Link>
+                <Link href="/areas" className="text-orange font-semibold px-3 py-1.5 text-sm hover:underline focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded">+ more</Link>
               </div>
             </div>
 
@@ -118,8 +118,8 @@ export default async function ServicePage({ params }: Props) {
                 <ul className="space-y-3">
                   {otherServices.map((s) => (
                     <li key={s.slug}>
-                      <Link href={`/services/${s.slug}`} className="flex items-center gap-3 hover:text-orange transition-colors">
-                        <span>{s.icon}</span>
+                      <Link href={`/services/${s.slug}`} className="flex items-center gap-3 hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2 transition-colors">
+                        <span aria-hidden="true">{s.icon}</span>
                         <span>{s.title}</span>
                       </Link>
                     </li>
@@ -130,7 +130,7 @@ export default async function ServicePage({ params }: Props) {
               <div className="bg-orange rounded-xl p-6 text-white text-center">
                 <h3 className="text-xl font-bold mb-2">Need Help Now?</h3>
                 <p className="text-white/90 mb-4 text-sm">Call for same-day service</p>
-                <a href={`tel:${BUSINESS.phone}`} className="block bg-white text-orange font-bold py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                <a href={`tel:${BUSINESS.phone}`} className="block bg-white text-orange font-bold py-3 rounded-lg hover:bg-gray-100 focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors">
                   {BUSINESS.phone}
                 </a>
               </div>
