@@ -29,7 +29,12 @@ jobs:
         run: npm ci
 
       - name: Generate blog post
-        run: npx tsx scripts/generate-blog-post.ts
+        id: generate
+        run: |
+          npx tsx scripts/generate-blog-post.ts
+          # Capture the slug of the generated post for the GBP step
+          LATEST_POST=$(ls -t content/blog/*.md | head -1 | xargs basename | sed 's/.md$//')
+          echo "slug=$LATEST_POST" >> "$GITHUB_OUTPUT"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
@@ -39,3 +44,10 @@ jobs:
           git config user.email "blog-bot@bergencountypatchboys.com"
           git add content/blog/ scripts/topic-queue.json
           git diff --staged --quiet && echo "No changes to commit" || (git commit -m "blog: auto-generate weekly post" && git push)
+
+      - name: Post to Google Business Profile
+        if: ${{ steps.generate.outputs.slug != '' }}
+        run: npx tsx scripts/post-to-gbp.ts "${{ steps.generate.outputs.slug }}"
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        continue-on-error: true # Don't fail the whole workflow if GBP post fails
