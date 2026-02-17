@@ -170,13 +170,31 @@ async function main() {
   if (topic.town) console.log(`Town: ${topic.town}`);
   console.log(`Primary keyword: ${topic.primaryKeyword}\n`);
 
-  // Check if post already exists
+  // Check if post already exists (by slug or by similar title)
   const existingPath = path.join(CONTENT_DIR, `${topic.slug}.md`);
   if (fs.existsSync(existingPath)) {
     console.log(`Post already exists at ${existingPath}. Marking as generated and skipping.\n`);
     topic.generated = true;
     saveQueue(topics);
     return;
+  }
+
+  // Check for duplicate topics by scanning existing post titles
+  const existingFiles = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));
+  for (const file of existingFiles) {
+    const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
+    const titleMatch = raw.match(/^title:\s*"(.+)"/m);
+    if (titleMatch) {
+      const existingTitle = titleMatch[1].toLowerCase();
+      const topicTitle = topic.title.toLowerCase();
+      // Skip if an existing post has the same or very similar title
+      if (existingTitle === topicTitle || existingTitle.includes(topicTitle) || topicTitle.includes(existingTitle)) {
+        console.log(`Duplicate topic detected: "${titleMatch[1]}" already exists in ${file}. Marking as generated and skipping.\n`);
+        topic.generated = true;
+        saveQueue(topics);
+        return;
+      }
+    }
   }
 
   // Generate content
