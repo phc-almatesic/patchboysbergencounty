@@ -104,6 +104,9 @@ export default function Header() {
             <Link href="/about" className="text-navy font-semibold hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2 transition-colors"
               onClick={() => handleNavClick("About", "desktop_nav")}
             >About</Link>
+            <Link href="/blog" className="text-navy font-semibold hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2 transition-colors"
+              onClick={() => handleNavClick("Blog", "desktop_nav")}
+            >Blog</Link>
             <Link href="/contact" className="text-navy font-semibold hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2 transition-colors"
               onClick={() => handleNavClick("Contact", "desktop_nav")}
             >Contact</Link>
@@ -163,6 +166,7 @@ export default function Header() {
               )}
               <Link href="/areas" className="text-navy font-semibold py-2 hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2" onClick={() => { setMobileOpen(false); handleNavClick("Service Areas", "mobile_nav"); }}>Service Areas</Link>
               <Link href="/about" className="text-navy font-semibold py-2 hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2" onClick={() => { setMobileOpen(false); handleNavClick("About", "mobile_nav"); }}>About</Link>
+              <Link href="/blog" className="text-navy font-semibold py-2 hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2" onClick={() => { setMobileOpen(false); handleNavClick("Blog", "mobile_nav"); }}>Blog</Link>
               <Link href="/contact" className="text-navy font-semibold py-2 hover:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2" onClick={() => { setMobileOpen(false); handleNavClick("Contact", "mobile_nav"); }}>Contact</Link>
               <Link
                 href="/contact"

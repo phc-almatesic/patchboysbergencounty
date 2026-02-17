@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { BUSINESS, SERVICES, BERGEN_TOWNS, TESTIMONIALS, FAQ } from "@/lib/data";
+import { getRecentPosts } from "@/lib/blog";
 import ContactForm from "@/components/ContactForm";
 import PhoneLink from "@/components/PhoneLink";
 import TrackedCTA from "@/components/TrackedCTA";
+import BlogCard from "@/components/BlogCard";
 
 function HeroSection() {
   return (
@@ -256,6 +258,44 @@ function FAQSection() {
   );
 }
 
+function BlogPreview() {
+  const posts = getRecentPosts(3);
+  if (posts.length === 0) return null;
+
+  return (
+    <section className="py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            Latest from Our Blog
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Tips, cost guides, and expert advice for Bergen County homeowners.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <BlogCard
+              key={post.slug}
+              slug={post.slug}
+              title={post.title}
+              date={post.date}
+              excerpt={post.excerpt}
+              readingTime={post.readingTime}
+              categories={post.categories}
+            />
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link href="/blog" className="text-orange font-semibold hover:underline focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-2 text-lg">
+            View all articles <span aria-hidden="true">&rarr;</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -266,6 +306,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <ServiceAreasPreview />
       <FAQSection />
+      <BlogPreview />
 
       {/* LocalBusiness Schema */}
       <script

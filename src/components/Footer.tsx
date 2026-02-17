@@ -139,6 +139,8 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Link href="/about" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">About</Link>
             <span className="text-white/20" aria-hidden="true">|</span>
+            <Link href="/blog" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">Blog</Link>
+            <span className="text-white/20" aria-hidden="true">|</span>
             <Link href="/contact" className="hover:text-orange focus:text-orange focus:outline-2 focus:outline-offset-2 focus:outline-orange rounded px-1 transition-colors">Contact</Link>
             <span className="text-white/20" aria-hidden="true">|</span>
             <span>A BELFOR Franchise Group Company</span>

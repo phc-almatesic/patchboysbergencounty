@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SERVICES, BERGEN_TOWNS } from "@/lib/data";
+import { getAllPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
@@ -30,5 +31,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...townPages];
+  const blogIndex = {
+    url: `${BASE_URL}/blog/`,
+    lastModified: LAST_UPDATED,
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  };
+
+  const blogPages = getAllPosts().map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}/`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...servicePages, ...townPages, blogIndex, ...blogPages];
 }
