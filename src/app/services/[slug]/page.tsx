@@ -30,11 +30,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Professional ${service.title.toLowerCase()} services in Bergen County, NJ. ${service.shortDesc}`,
       url: `https://www.bergencountypatchboys.com/services/${slug}/`,
       type: "website",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${service.title} in Bergen County NJ - The Patch Boys`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description: `Professional ${service.title.toLowerCase()} services in Bergen County, NJ. ${service.shortDesc}`,
+      images: ["/og-image.png"],
     },
   };
 }

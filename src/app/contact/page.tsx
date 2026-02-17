@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description: "Request a free, no-obligation drywall repair estimate in Bergen County, NJ. Call or fill out our form for fast, professional service.",
     url: "https://www.bergencountypatchboys.com/contact/",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Contact The Patch Boys of Bergen County" }],
   },
   twitter: {
     card: "summary_large_image",

@@ -13,11 +13,13 @@ export const metadata: Metadata = {
     description: "See the incredible before and after results of our drywall repair work throughout Bergen County, NJ.",
     url: "https://www.bergencountypatchboys.com/gallery/",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Before & After Drywall Repair Gallery" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Before & After Drywall Repair Gallery",
     description: "See our drywall repair results throughout Bergen County, NJ. Invisible patches guaranteed.",
+    images: ["/og-image.png"],
   },
 };
 

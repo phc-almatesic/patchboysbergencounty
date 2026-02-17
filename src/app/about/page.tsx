@@ -16,11 +16,13 @@ export const metadata: Metadata = {
     description: "Learn about The Patch Boys of Bergen County — your local drywall repair experts. Fully licensed, insured, and committed to flawless results.",
     url: "https://www.bergencountypatchboys.com/about/",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "About The Patch Boys of Bergen County" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "About The Patch Boys of Bergen County",
     description: "Your local drywall repair experts. Fully licensed, insured, and committed to flawless results.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -57,6 +59,29 @@ export default function AboutPage() {
             </div>
             <div className="bg-gray-warm rounded-2xl p-12 flex items-center justify-center">
               <Image src="/logo.png" alt="The Patch Boys" width={300} height={170} className="w-auto max-h-40" />
+            </div>
+          </div>
+
+          {/* Meet the Owner */}
+          <div className="bg-gray-warm rounded-2xl p-8 md:p-12 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+              <div className="flex justify-center">
+                <div className="w-48 h-48 rounded-full bg-navy flex items-center justify-center text-white text-6xl font-bold overflow-hidden">
+                  MO
+                </div>
+              </div>
+              <div className="md:col-span-2">
+                <h2 className="text-3xl font-bold text-navy mb-2">Meet the Owner</h2>
+                <h3 className="text-xl font-semibold text-orange mb-4">Matteo Osso</h3>
+                <div className="space-y-3 text-gray-600 leading-relaxed">
+                  <p>
+                    Matteo Osso is the owner and operator of The Patch Boys of Bergen County. As a local resident and homeowner himself, Matteo understands the pride Bergen County families take in their homes — and the frustration that comes with damaged walls and ceilings.
+                  </p>
+                  <p>
+                    Matteo started The Patch Boys franchise to bring professional, focused drywall repair services to his community. Under his leadership, the team has completed over 1,000 repairs across Bergen County, earning a 4.9-star rating from homeowners who value quality workmanship and honest service.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 

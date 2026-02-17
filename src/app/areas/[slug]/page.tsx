@@ -35,11 +35,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: ogDesc,
       url: `https://www.bergencountypatchboys.com/areas/${slug}/`,
       type: "website",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `Drywall Repair in ${town.name}, NJ - The Patch Boys`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description: ogDesc,
+      images: ["/og-image.png"],
     },
   };
 }
