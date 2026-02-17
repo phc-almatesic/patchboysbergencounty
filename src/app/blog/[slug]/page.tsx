@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Article Content */}
             <div className="lg:col-span-2">
               <article
-                className="prose prose-lg max-w-none prose-headings:text-navy prose-headings:font-bold prose-a:text-orange prose-a:font-semibold hover:prose-a:text-orange-dark prose-strong:text-navy prose-table:text-sm"
+                className="prose prose-lg max-w-none overflow-hidden prose-headings:text-navy prose-headings:font-bold prose-a:text-orange prose-a:font-semibold hover:prose-a:text-orange-dark prose-strong:text-navy"
                 dangerouslySetInnerHTML={{ __html: post.htmlContent }}
               />
 
