@@ -64,39 +64,41 @@ textarea:focus-visible {
 
 /* Blog prose content styling */
 .prose h2 {
-  margin-top: 2.5em;
-  margin-bottom: 0.75em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
 }
 
 .prose h3 {
-  margin-top: 2em;
-  margin-bottom: 0.5em;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+  font-size: 1.2em;
 }
 
 .prose p {
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
-  line-height: 1.8;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.65;
 }
 
 .prose ul,
 .prose ol {
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
   padding-left: 1.5em;
 }
 
 .prose li {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  line-height: 1.7;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  line-height: 1.6;
 }
 
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   overflow-x: auto;
   display: block;
 }
@@ -105,13 +107,13 @@ textarea:focus-visible {
   background-color: var(--color-navy);
   color: white;
   font-weight: 700;
-  padding: 0.75em 1em;
+  padding: 0.6em 1em;
   text-align: left;
   white-space: nowrap;
 }
 
 .prose tbody td {
-  padding: 0.75em 1em;
+  padding: 0.6em 1em;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -126,8 +128,8 @@ textarea:focus-visible {
 .prose blockquote {
   border-left: 4px solid var(--color-orange);
   padding-left: 1.25em;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   font-style: italic;
   color: var(--color-text-secondary);
 }
