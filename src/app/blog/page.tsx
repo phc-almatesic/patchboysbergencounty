@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllPosts, getAllCategories } from "@/lib/blog";
+import { getAllPosts, getAllCategories, slugifyCategory } from "@/lib/blog";
 import { BUSINESS } from "@/lib/data";
 import BlogCard from "@/components/BlogCard";
 import TrackedCTA from "@/components/TrackedCTA";
@@ -49,12 +49,13 @@ export default function BlogPage() {
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-sm font-semibold text-navy mr-2">Categories:</span>
               {categories.map((cat) => (
-                <span
+                <Link
                   key={cat}
-                  className="bg-gray-warm text-navy font-medium px-3 py-1.5 rounded-lg text-sm"
+                  href={`/blog/category/${slugifyCategory(cat)}`}
+                  className="bg-gray-warm text-navy font-medium px-3 py-1.5 rounded-lg text-sm hover:bg-orange hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
                 >
                   {cat}
-                </span>
+                </Link>
               ))}
             </div>
           </div>

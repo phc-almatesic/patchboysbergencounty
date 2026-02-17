@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug, getRecentPosts, getAllCategories, getRelatedPosts } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, getRecentPosts, getAllCategories, getRelatedPosts, slugifyCategory } from "@/lib/blog";
 import { BUSINESS } from "@/lib/data";
 import BlogSidebar from "@/components/BlogSidebar";
 import BlogCard from "@/components/BlogCard";
@@ -81,9 +81,9 @@ export default async function BlogPostPage({ params }: Props) {
                 <span aria-hidden="true">|</span>
                 <div className="flex flex-wrap gap-2">
                   {post.categories.map((cat) => (
-                    <span key={cat} className="bg-white/10 px-2.5 py-0.5 rounded-full text-xs font-medium">
+                    <Link key={cat} href={`/blog/category/${slugifyCategory(cat)}`} className="bg-white/10 px-2.5 py-0.5 rounded-full text-xs font-medium hover:bg-orange/80 transition-colors">
                       {cat}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               </>

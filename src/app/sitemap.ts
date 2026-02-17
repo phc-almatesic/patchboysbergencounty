@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SERVICES, BERGEN_TOWNS } from "@/lib/data";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getAllCategories, slugifyCategory } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
@@ -45,5 +45,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...servicePages, ...townPages, blogIndex, ...blogPages];
+  const categoryPages = getAllCategories().map((cat) => ({
+    url: `${BASE_URL}/blog/category/${slugifyCategory(cat)}/`,
+    lastModified: LAST_UPDATED,
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  return [...staticPages, ...servicePages, ...townPages, blogIndex, ...blogPages, ...categoryPages];
 }

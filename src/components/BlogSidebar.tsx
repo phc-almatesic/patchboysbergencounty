@@ -1,7 +1,7 @@
 import Link from "next/link";
 import TrackedLink from "@/components/TrackedLink";
 import { BUSINESS } from "@/lib/data";
-import type { BlogPost } from "@/lib/blog";
+import { slugifyCategory, type BlogPost } from "@/lib/blog";
 
 interface BlogSidebarProps {
   recentPosts: BlogPost[];
@@ -38,12 +38,13 @@ export default function BlogSidebar({ recentPosts, categories, currentSlug }: Bl
           <h3 className="text-xl font-bold text-navy mb-4">Categories</h3>
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
-              <span
+              <Link
                 key={cat}
-                className="bg-white text-navy font-medium px-3 py-1.5 rounded-lg text-sm"
+                href={`/blog/category/${slugifyCategory(cat)}`}
+                className="bg-white text-navy font-medium px-3 py-1.5 rounded-lg text-sm hover:bg-orange hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
               >
                 {cat}
-              </span>
+              </Link>
             ))}
           </div>
         </div>

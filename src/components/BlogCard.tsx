@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { slugifyCategory } from "@/lib/blog";
 
 interface BlogCardProps {
   slug: string;
@@ -21,12 +22,13 @@ export default function BlogCard({ slug, title, date, excerpt, readingTime, cate
       <div className="p-6 flex flex-col flex-1">
         <div className="flex flex-wrap gap-2 mb-3">
           {categories.map((cat) => (
-            <span
+            <Link
               key={cat}
-              className="bg-orange/10 text-orange text-xs font-semibold px-2.5 py-1 rounded-full"
+              href={`/blog/category/${slugifyCategory(cat)}`}
+              className="bg-orange/10 text-orange text-xs font-semibold px-2.5 py-1 rounded-full hover:bg-orange hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-orange transition-colors"
             >
               {cat}
-            </span>
+            </Link>
           ))}
         </div>
         <h3 className="text-xl font-bold text-navy mb-2">

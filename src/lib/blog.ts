@@ -86,12 +86,20 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
   return getAllPosts().find((p) => p.slug === slug);
 }
 
+export function slugifyCategory(category: string): string {
+  return category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 export function getAllCategories(): string[] {
   const cats = new Set<string>();
   for (const post of getAllPosts()) {
     for (const c of post.categories) cats.add(c);
   }
   return Array.from(cats).sort();
+}
+
+export function getCategoryBySlug(slug: string): string | undefined {
+  return getAllCategories().find((c) => slugifyCategory(c) === slug);
 }
 
 export function getAllTags(): string[] {
