@@ -33,16 +33,9 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      - name: Check for changes
-        id: changes
-        run: |
-          git diff --quiet && git diff --staged --quiet && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
-
       - name: Commit and push new post
-        if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "Blog Bot"
           git config user.email "blog-bot@bergencountypatchboys.com"
           git add content/blog/ scripts/topic-queue.json
-          git commit -m "blog: auto-generate weekly post"
-          git push
+          git diff --staged --quiet && echo "No changes to commit" || (git commit -m "blog: auto-generate weekly post" && git push)
