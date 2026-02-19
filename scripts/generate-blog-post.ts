@@ -148,9 +148,37 @@ function writePost(topic: TopicEntry, content: string): string {
   return filePath;
 }
 
+// Check if a post was already generated this week (within the last 6 days)
+function wasPostGeneratedThisWeek(): string | null {
+  if (!fs.existsSync(CONTENT_DIR)) return null;
+  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));
+  const sixDaysAgo = new Date();
+  sixDaysAgo.setDate(sixDaysAgo.getDate() - 6);
+
+  for (const file of files) {
+    const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
+    const dateMatch = raw.match(/^date:\s*"(\d{4}-\d{2}-\d{2})"/m);
+    if (dateMatch) {
+      const postDate = new Date(dateMatch[1] + "T12:00:00Z");
+      if (postDate >= sixDaysAgo) {
+        return file;
+      }
+    }
+  }
+  return null;
+}
+
 // Main execution
 async function main() {
   console.log("=== Blog Post Generator ===\n");
+
+  // Guard: only one post per week
+  const recentPost = wasPostGeneratedThisWeek();
+  if (recentPost) {
+    console.log(`A post was already generated this week: ${recentPost}`);
+    console.log("Skipping to avoid duplicates. Only one post per week is allowed.");
+    return;
+  }
 
   // Load queue
   const topics = loadQueue();
