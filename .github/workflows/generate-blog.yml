@@ -12,6 +12,9 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    outputs:
+      post_title: ${{ steps.commit.outputs.post_title }}
+      new_post: ${{ steps.commit.outputs.new_post }}
 
     steps:
       - name: Checkout code
@@ -34,8 +37,64 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Commit and push new post
+        id: commit
         run: |
           git config user.name "Blog Bot"
           git config user.email "blog-bot@bergencountypatchboys.com"
           git add content/blog/ scripts/topic-queue.json
-          git diff --staged --quiet && echo "No changes to commit" || (git commit -m "blog: auto-generate weekly post" && git push)
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "new_post=false" >> "$GITHUB_OUTPUT"
+          else
+            TITLE=$(git diff --staged --name-only | grep 'content/blog/' | head -1 | xargs basename | sed 's/\.mdx$//' | sed 's/-/ /g')
+            echo "post_title=$TITLE" >> "$GITHUB_OUTPUT"
+            git commit -m "blog: auto-generate weekly post"
+            git push
+            echo "new_post=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build site
+        if: steps.commit.outputs.new_post == 'true'
+        run: npm run build
+        env:
+          NEXT_PUBLIC_FORMSPREE_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_ID }}
+          NEXT_PUBLIC_GTM_ID: ${{ secrets.NEXT_PUBLIC_GTM_ID }}
+
+      - name: Install sshpass
+        if: steps.commit.outputs.new_post == 'true'
+        run: sudo apt-get install -y sshpass
+
+      - name: Add server to known hosts
+        if: steps.commit.outputs.new_post == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 64.227.5.40 >> ~/.ssh/known_hosts
+
+      - name: Deploy to Cloudways
+        if: steps.commit.outputs.new_post == 'true'
+        run: |
+          sshpass -p "${{ secrets.CLOUDWAYS_SSH_PASSWORD }}" rsync -rlvz --delete --no-perms --no-times --no-owner --no-group \
+            -e "ssh" \
+            out/ \
+            master_ysczmbeyuv@64.227.5.40:/home/380964.cloudwaysapps.com/sxvdrtfdfa/public_html/
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: generate
+    if: always()
+
+    steps:
+      - name: Send email notification
+        run: |
+          if [ "${{ needs.generate.result }}" = "success" ]; then
+            SUBJECT="Blog post deployed: ${{ needs.generate.outputs.post_title || 'weekly post' }}"
+            BODY="<p>The weekly blog post has been generated and deployed successfully.</p><p><strong>Post:</strong> ${{ needs.generate.outputs.post_title || 'weekly post' }}</p><p><a href=\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\">View workflow run</a></p>"
+          else
+            SUBJECT="Blog automation failed - check logs"
+            BODY="<p>The weekly blog post automation failed.</p><p><a href=\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\">View workflow run logs</a></p>"
+          fi
+
+          curl -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"from\": \"onboarding@resend.dev\", \"to\": \"am@swamp80.com\", \"subject\": \"$SUBJECT\", \"html\": \"$BODY\"}"
