@@ -741,7 +741,7 @@
         "pricing"
       ],
       "primaryKeyword": "drywall repair cost Bergen County NJ",
-      "generated": true
+      "generated": false
     },
     {
       "id": "cost-40",
@@ -760,7 +760,7 @@
         "pricing"
       ],
       "primaryKeyword": "ceiling repair cost Bergen County NJ",
-      "generated": true
+      "generated": false
     },
     {
       "id": "cost-41",
@@ -779,7 +779,7 @@
         "pricing"
       ],
       "primaryKeyword": "plaster repair cost Bergen County NJ",
-      "generated": true
+      "generated": false
     },
     {
       "id": "cost-42",
@@ -874,7 +874,7 @@
         "diy"
       ],
       "primaryKeyword": "how to fix water damaged drywall",
-      "generated": false
+      "generated": true
     },
     {
       "id": "howto-47",
@@ -1078,7 +1078,7 @@
         "bergen county"
       ],
       "primaryKeyword": "DIY vs professional drywall repair",
-      "generated": false
+      "generated": true
     },
     {
       "id": "diy-58",
@@ -1132,7 +1132,7 @@
         "bergen county"
       ],
       "primaryKeyword": "winter drywall damage NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "seasonal-61",
