@@ -348,7 +348,49 @@ export function generateTopicQueue(): TopicEntry[] {
   return topics;
 }
 
-// Interleave topics so we don't publish the same template type back-to-back
+// Rotation order — ensures diverse template types week over week
+const ROTATION_ORDER: TemplateType[] = [
+  "cost", "location", "how-to", "signs", "location", "diy-vs-pro", "seasonal", "location",
+];
+
+// Pick the next topic using a persistent rotation index so we never
+// repeat the same template type back-to-back across weekly runs.
+export function getNextTopic(topics: TopicEntry[], rotationIndex: number): { topic: TopicEntry | null; nextRotationIndex: number } {
+  const byTemplate: Record<TemplateType, TopicEntry[]> = {
+    location: [],
+    cost: [],
+    "how-to": [],
+    signs: [],
+    "diy-vs-pro": [],
+    seasonal: [],
+  };
+
+  for (const t of topics) {
+    if (!t.generated) {
+      byTemplate[t.template].push(t);
+    }
+  }
+
+  // Try each slot in the rotation starting from the current index.
+  // If a template type is exhausted, skip to the next slot.
+  for (let attempt = 0; attempt < ROTATION_ORDER.length; attempt++) {
+    const idx = (rotationIndex + attempt) % ROTATION_ORDER.length;
+    const template = ROTATION_ORDER[idx];
+    const pool = byTemplate[template];
+
+    if (pool.length > 0) {
+      return {
+        topic: pool[0],
+        nextRotationIndex: (idx + 1) % ROTATION_ORDER.length,
+      };
+    }
+  }
+
+  // All template pools exhausted
+  return { topic: null, nextRotationIndex: rotationIndex };
+}
+
+// Kept for backwards compatibility but no longer used for topic selection
 export function getScheduledOrder(topics: TopicEntry[]): TopicEntry[] {
   const byTemplate: Record<TemplateType, TopicEntry[]> = {
     location: [],
@@ -365,8 +407,7 @@ export function getScheduledOrder(topics: TopicEntry[]): TopicEntry[] {
     }
   }
 
-  // Interleave: cost, location, how-to, signs, location, diy-vs-pro, seasonal, location, ...
-  const order: TemplateType[] = ["cost", "location", "how-to", "signs", "location", "diy-vs-pro", "seasonal", "location"];
+  const order: TemplateType[] = ROTATION_ORDER;
   const result: TopicEntry[] = [];
   const indices: Record<TemplateType, number> = {
     location: 0, cost: 0, "how-to": 0, signs: 0, "diy-vs-pro": 0, seasonal: 0,

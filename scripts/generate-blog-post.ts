@@ -8,37 +8,51 @@ import {
   SYSTEM_PROMPT,
   getUserPrompt,
   generateTopicQueue,
-  getScheduledOrder,
+  getNextTopic,
   type TopicEntry,
 } from "./blog-config";
 
 const QUEUE_PATH = path.join(__dirname, "topic-queue.json");
 const CONTENT_DIR = path.join(process.cwd(), BLOG_CONFIG.contentDir);
 
+interface QueueData {
+  lastUpdated: string;
+  rotationIndex: number;
+  topics: TopicEntry[];
+}
+
 // Load or initialize the topic queue
-function loadQueue(): TopicEntry[] {
+function loadQueue(): QueueData {
   if (fs.existsSync(QUEUE_PATH)) {
     const data = JSON.parse(fs.readFileSync(QUEUE_PATH, "utf-8"));
-    return data.topics;
+    return {
+      lastUpdated: data.lastUpdated,
+      rotationIndex: data.rotationIndex ?? 0,
+      topics: data.topics,
+    };
   }
   // First run: generate and save the initial queue
   const topics = generateTopicQueue();
-  saveQueue(topics);
-  return topics;
+  const queue: QueueData = { lastUpdated: new Date().toISOString(), rotationIndex: 0, topics };
+  saveQueue(queue);
+  return queue;
 }
 
-function saveQueue(topics: TopicEntry[]): void {
+function saveQueue(queue: QueueData): void {
   fs.writeFileSync(
     QUEUE_PATH,
-    JSON.stringify({ lastUpdated: new Date().toISOString(), topics }, null, 2),
+    JSON.stringify(
+      { lastUpdated: new Date().toISOString(), rotationIndex: queue.rotationIndex, topics: queue.topics },
+      null,
+      2
+    ),
     "utf-8"
   );
 }
 
-// Pick the next topic to generate
-function pickNextTopic(topics: TopicEntry[]): TopicEntry | null {
-  const scheduled = getScheduledOrder(topics);
-  return scheduled.length > 0 ? scheduled[0] : null;
+// Pick the next topic to generate (uses rotation-aware selection)
+function pickNextTopic(queue: QueueData): { topic: TopicEntry | null; nextRotationIndex: number } {
+  return getNextTopic(queue.topics, queue.rotationIndex);
 }
 
 // Generate blog post content via Claude API
@@ -181,12 +195,13 @@ async function main() {
   }
 
   // Load queue
-  const topics = loadQueue();
-  const remaining = topics.filter((t) => !t.generated);
-  console.log(`Topics in queue: ${topics.length} total, ${remaining.length} remaining\n`);
+  const queue = loadQueue();
+  const remaining = queue.topics.filter((t) => !t.generated);
+  console.log(`Topics in queue: ${queue.topics.length} total, ${remaining.length} remaining`);
+  console.log(`Rotation index: ${queue.rotationIndex}\n`);
 
-  // Pick next topic
-  const topic = pickNextTopic(topics);
+  // Pick next topic (rotation-aware — different template type each week)
+  const { topic, nextRotationIndex } = pickNextTopic(queue);
   if (!topic) {
     console.log("No more topics to generate. All done!");
     return;
@@ -203,7 +218,8 @@ async function main() {
   if (fs.existsSync(existingPath)) {
     console.log(`Post already exists at ${existingPath}. Marking as generated and skipping.\n`);
     topic.generated = true;
-    saveQueue(topics);
+    queue.rotationIndex = nextRotationIndex;
+    saveQueue(queue);
     return;
   }
 
@@ -219,7 +235,8 @@ async function main() {
       if (existingTitle === topicTitle || existingTitle.includes(topicTitle) || topicTitle.includes(existingTitle)) {
         console.log(`Duplicate topic detected: "${titleMatch[1]}" already exists in ${file}. Marking as generated and skipping.\n`);
         topic.generated = true;
-        saveQueue(topics);
+        queue.rotationIndex = nextRotationIndex;
+        saveQueue(queue);
         return;
       }
     }
@@ -243,12 +260,14 @@ async function main() {
   const filePath = writePost(topic, content);
   console.log(`Post written to: ${filePath}`);
 
-  // Update queue
+  // Update queue with new rotation position
   topic.generated = true;
-  saveQueue(topics);
+  queue.rotationIndex = nextRotationIndex;
+  saveQueue(queue);
 
-  const newRemaining = topics.filter((t) => !t.generated);
+  const newRemaining = queue.topics.filter((t) => !t.generated);
   console.log(`\nDone! ${newRemaining.length} topics remaining in queue.`);
+  console.log(`Next rotation index: ${nextRotationIndex}`);
 }
 
 main().catch((err) => {
