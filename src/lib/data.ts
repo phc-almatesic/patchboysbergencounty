@@ -12,7 +12,30 @@ export const BUSINESS = {
   googleMapsEmbed: "",
 };
 
-export const SERVICES = [
+export type ServiceProcessStep = { title: string; description: string };
+export type ServiceIssue = { problem: string; solution: string };
+export type ServiceFAQ = { q: string; a: string };
+
+export type Service = {
+  slug: string;
+  title: string;
+  shortDesc: string;
+  longDesc: string;
+  icon: string;
+  benefits: string[];
+  keywords: string[];
+  introParagraphs: string[];
+  processSteps: ServiceProcessStep[];
+  commonIssues: ServiceIssue[];
+  pricingInfo: {
+    range: string;
+    factors: string[];
+    note: string;
+  };
+  serviceFAQs: ServiceFAQ[];
+};
+
+export const SERVICES: Service[] = [
   {
     slug: "drywall-repair",
     title: "Drywall Repair",
@@ -21,6 +44,38 @@ export const SERVICES = [
     icon: "🔧",
     benefits: ["Same-day repairs available", "Invisible patch results", "All hole sizes handled", "Water damage specialists"],
     keywords: ["drywall repair", "drywall patching", "hole repair", "wall repair", "sheetrock repair"],
+    introParagraphs: [
+      "Damaged drywall is one of the most common repair needs in Bergen County homes, and it rarely happens at a convenient time. A doorknob punched through the wall, a bed frame dragged across the sheetrock, a leak behind the washing machine — these everyday accidents leave holes, dents, and cracks that make an otherwise well-kept home look neglected. The Patch Boys of Bergen County specializes in drywall repair that restores walls to a truly invisible finish, so you can stop staring at that hole every time you walk through the room.",
+      "We repair everything from pinholes and hairline cracks to large gashes, door-handle punches, drywall anchor craters, and sections damaged by water or impact. Our technicians carry all the tools and materials needed to complete most repairs in a single visit, including 1/2-inch and 5/8-inch drywall, joint compound, mesh and paper tape, corner bead, texture sprayers, and color-matched primer. We arrive in clean, marked vehicles, protect your floors and furniture with drop cloths and plastic, and leave the workspace cleaner than we found it.",
+      "What sets our drywall repair apart is our obsession with invisible results. Anyone can slap mud on a hole. Matching the surrounding texture, feathering the compound edges, and blending the paint so the patch disappears takes craft — and it's what we do every day. Homeowners across Hackensack, Paramus, Teaneck, Ridgewood, Fair Lawn, and the rest of Bergen County call us because they've been burned by handymen who left visible patches. We fix those too.",
+    ],
+    processSteps: [
+      { title: "Free On-Site Estimate", description: "We inspect the damage, identify the root cause (impact, settling, water), and give you a fixed, written price before any work begins. No surprises." },
+      { title: "Surface Prep & Containment", description: "We protect floors and nearby furniture with drop cloths, tape off the work area, and cut back the damaged drywall to solid edges." },
+      { title: "Patch Installation", description: "For small holes we use a California patch or hot patch; for larger holes we cut a clean rectangle, install backing, and secure a new drywall piece flush to the existing surface." },
+      { title: "Taping & Mudding", description: "We apply joint tape and three coats of joint compound, feathering each coat wider than the last and sanding between coats for a seamless transition." },
+      { title: "Texture Matching", description: "We spray or roll texture to match your existing orange peel, knockdown, smooth, or hand-troweled finish so the patch blends perfectly." },
+      { title: "Prime & Paint Touch-Up", description: "We prime the repair and touch up the paint using your existing color or a close match, leaving a wall that looks like the damage never happened." },
+    ],
+    commonIssues: [
+      { problem: "Doorknob holes and furniture impact damage", solution: "We cut back to solid drywall, install a backer board, patch with new drywall, and finish flush with the surrounding wall." },
+      { problem: "Nail pops and screw pops from settling", solution: "We remove or reset the fastener, drive a new screw above and below, and finish with three coats of compound." },
+      { problem: "Drywall anchor craters from removed shelving or TVs", solution: "We remove the anchor, fill with setting-type compound, apply tape if needed, and finish with texture matching." },
+      { problem: "Cracks at corners, seams, and above doorways", solution: "We re-tape the seam with paper or mesh tape and apply three coats of compound to prevent the crack from returning." },
+      { problem: "Water-damaged or stained drywall", solution: "We cut out the damaged section, verify the leak is fixed, install new drywall, and finish with stain-blocking primer and matched paint." },
+      { problem: "Sagging or bulging drywall from moisture", solution: "We remove the compromised section back to studs, check framing and insulation, and install new moisture-resistant drywall where appropriate." },
+    ],
+    pricingInfo: {
+      range: "Most drywall repairs in Bergen County run $150–$500",
+      factors: ["Size and number of holes or damaged areas", "Texture complexity (smooth vs. knockdown vs. hand-troweled)", "Whether painting and priming is included", "Accessibility of the work area", "Ceiling repairs vs. wall repairs"],
+      note: "Every job starts with a free, fixed-price estimate. You'll know the full cost in writing before we start.",
+    },
+    serviceFAQs: [
+      { q: "How long does a drywall repair take?", a: "Most small-to-medium drywall repairs are completed in a single visit lasting 2–4 hours. Larger repairs or jobs that require compound to dry fully between coats may need a second visit the following day." },
+      { q: "Will the patch be noticeable?", a: "When done correctly, no. Our texture matching and paint blending process is designed to make the repair invisible under normal lighting. We don't leave until you're satisfied the patch has disappeared." },
+      { q: "Do you handle large holes and whole-panel replacement?", a: "Yes. Whether it's a 2-inch doorknob hole or a 4-foot section damaged by a plumbing leak, we have the materials and experience to handle it in a single service call." },
+      { q: "Can you repair drywall damaged by water?", a: "Yes, as long as the water source has been stopped. We remove the damaged drywall, inspect the framing, install new sheetrock, and finish with stain-blocking primer and color-matched paint." },
+    ],
   },
   {
     slug: "ceiling-repair",
@@ -30,6 +85,38 @@ export const SERVICES = [
     icon: "🏠",
     benefits: ["Water stain removal", "Crack and seam repair", "Sagging ceiling fix", "Seamless blending"],
     keywords: ["ceiling repair", "ceiling crack repair", "water stain ceiling", "ceiling patching"],
+    introParagraphs: [
+      "Ceiling damage is one of the most stressful repairs a homeowner faces. It's visible from everywhere in the room, it often signals a bigger problem like a plumbing leak or ice-dam damage, and nobody enjoys working overhead on a ladder for hours. The Patch Boys of Bergen County repairs ceilings every single week — water stains from second-floor bathrooms, cracks along seams, sagging panels, and textured ceilings that need patching after a leak has been fixed. We know Bergen County's housing stock well, from prewar colonials in Ridgewood and Glen Rock to newer construction in Mahwah and Montvale, and we adjust our approach to each ceiling type.",
+      "A ceiling repair isn't just a drywall repair turned sideways. Gravity works against you, the compound has to be applied in thinner coats, texture matching is harder because ceilings are lit differently than walls, and any mistake is visible from every angle. Our technicians have repaired thousands of ceilings across Bergen County and carry specialized ladders, stilts, spray rigs, and lighting so the finished repair blends cleanly with the surrounding surface.",
+      "Before we patch, we identify what caused the damage. A water stain without a fixed leak will come back. A sagging section usually means wet insulation or compromised fasteners. A recurring crack along a seam often means the tape has failed and needs to be replaced, not just re-mudded. We take the time to diagnose correctly so the repair actually lasts.",
+    ],
+    processSteps: [
+      { title: "Inspection & Diagnosis", description: "We locate the source of the damage — leak, settling, failed tape, or impact — and confirm it's resolved before starting cosmetic repair." },
+      { title: "Protection", description: "Ceiling work is messy. We cover floors and furniture with plastic and drop cloths, and we mask off light fixtures and vents." },
+      { title: "Damage Removal", description: "We cut back wet, stained, or compromised drywall to solid material. For sagging sections we remove the panel back to the ceiling joists." },
+      { title: "New Drywall or Patch Install", description: "We install new drywall or a patch panel, securing it to joists with screws and backing as needed." },
+      { title: "Tape, Mud, Sand", description: "We apply tape and three coats of compound, sanding between coats for a flat, feathered transition to the existing ceiling." },
+      { title: "Texture Match & Paint", description: "We match the existing ceiling texture — smooth, stomp, swirl, orange peel, or knockdown — then prime and paint to blend the repair invisibly." },
+    ],
+    commonIssues: [
+      { problem: "Brown water stains from upstairs leaks", solution: "Once the leak is fixed, we cut out the stained drywall, inspect for mold and wet insulation, and install fresh sheetrock with stain-blocking primer." },
+      { problem: "Cracks along the drywall-to-ceiling seam", solution: "We remove the failed tape, re-tape the seam, and apply three coats of compound to stop the crack from returning." },
+      { problem: "Sagging ceiling panels", solution: "We remove the sagging section back to joists, check for water damage or failed fasteners, and install new drywall with proper screw spacing." },
+      { problem: "Nail pops and visible fastener heads", solution: "We reset the fasteners, drive new screws, and finish with three coats of compound and matching texture." },
+      { problem: "Cracks radiating from light fixtures or HVAC vents", solution: "We re-secure the drywall around the fixture, tape and mud the cracks, and texture-match to blend the repair." },
+      { problem: "Damage from ice dams or roof leaks", solution: "After the roof issue is fixed, we replace water-damaged drywall, treat for any mold concerns, and restore texture and paint." },
+    ],
+    pricingInfo: {
+      range: "Most ceiling repairs in Bergen County run $200–$700",
+      factors: ["Size of the damaged area", "Ceiling height (standard 8-foot vs. vaulted or cathedral)", "Texture type and complexity", "Whether water damage remediation is needed", "Painting and priming inclusion"],
+      note: "We provide free, written estimates for every ceiling repair — no hidden fees, no day-of surprises.",
+    },
+    serviceFAQs: [
+      { q: "My ceiling has a water stain — do I need to fix the leak first?", a: "Yes. We can help you identify the source, but the leak must be repaired (by a plumber or roofer) before we install new drywall. Otherwise the stain will return." },
+      { q: "Can you match a textured ceiling?", a: "Yes. We match all common ceiling textures including smooth, stomp, swirl, orange peel, and knockdown. Our technicians carry the equipment needed to replicate each texture." },
+      { q: "How long does a ceiling repair take?", a: "Small cosmetic repairs take 2–4 hours. Larger repairs involving water damage or multiple panels may require two visits to allow compound to dry fully between coats." },
+      { q: "Do you repair popcorn ceilings?", a: "Yes, we patch popcorn ceilings and can also remove them entirely if you'd prefer a modern smooth finish. See our popcorn ceiling removal service for details." },
+    ],
   },
   {
     slug: "plaster-repair",
@@ -39,6 +126,38 @@ export const SERVICES = [
     icon: "🏗️",
     benefits: ["Historic home specialists", "Traditional methods", "Crack and crumble repair", "Preserves home character"],
     keywords: ["plaster repair", "plaster wall repair", "plaster ceiling repair", "old house plaster"],
+    introParagraphs: [
+      "Bergen County is full of beautiful older homes — prewar colonials, Tudors, Victorians, and midcentury capes — and a huge number of them still have original plaster walls and ceilings. Plaster is denser, more sound-absorbent, and more fire-resistant than drywall, and it's a big part of what gives these homes their character. But plaster also cracks, crumbles, delaminates from the lath, and develops spider-web fractures as houses settle. Fixing plaster correctly requires different materials, different tools, and different techniques than drywall — which is why most general handymen leave plaster repairs looking worse than when they started.",
+      "The Patch Boys of Bergen County repairs plaster the right way. We use setting-type compounds, plaster washers, bonding agents, and traditional three-coat methods when appropriate, and we know when a repair should be re-plastered versus skim-coated versus patched with drywall. We've worked on homes in Ridgewood, Englewood, Teaneck, Rutherford, Hackensack, and throughout Bergen County that are 80, 100, even 120 years old — and we treat them with the care they deserve.",
+      "We also understand the realities of living in an old house: you don't want to tear out a whole wall to fix a crack, and you shouldn't have to. Most plaster repairs can be done in a way that preserves the original surrounding material while making the damaged area disappear. That's our specialty.",
+    ],
+    processSteps: [
+      { title: "Assess the Plaster System", description: "We identify whether you have traditional lath-and-plaster, rock lath, or plaster over drywall — each requires a different repair approach." },
+      { title: "Stabilize Loose Plaster", description: "We use plaster washers and adhesive to reattach plaster that has separated from the lath, preventing further crumbling." },
+      { title: "Remove Damaged Material", description: "We carefully remove only the crumbled or cracked plaster, preserving as much of the original surface as possible." },
+      { title: "Bonding & Base Coat", description: "We apply a bonding agent to the lath or substrate, then a base coat of setting-type compound to build the repair to level." },
+      { title: "Finish Coat & Blending", description: "We apply a finish coat, feather the edges into the surrounding plaster, and sand for a seamless transition." },
+      { title: "Texture Match & Paint", description: "We replicate any hand-troweled, sand, or skip-trowel texture in the original plaster and touch up the paint so the repair disappears." },
+    ],
+    commonIssues: [
+      { problem: "Spider-web cracks from house settling", solution: "We stabilize the area, apply fiberglass mesh if needed, and skim-coat with setting-type compound to stop crack recurrence." },
+      { problem: "Plaster separating from wood lath", solution: "We install plaster washers to re-anchor the plaster to the lath, then skim-coat over the washers for an invisible finish." },
+      { problem: "Crumbled sections from water damage", solution: "After the leak is resolved, we cut back to sound plaster, apply bonding agent, and rebuild the area with base coat and finish coat plaster." },
+      { problem: "Cracks around doorways and windows", solution: "We re-tape the seam with mesh tape, apply setting-type compound in three coats, and blend into the surrounding texture." },
+      { problem: "Ceiling plaster sagging or detaching", solution: "We stabilize with washers where possible, or remove and replace the compromised area with matching material." },
+      { problem: "Patches from old renovations that never blended", solution: "We skim-coat the entire patched area, matching texture and feathering edges so previous bad repairs disappear." },
+    ],
+    pricingInfo: {
+      range: "Most plaster repairs in Bergen County run $250–$900",
+      factors: ["Severity and size of damage", "Whether stabilization (plaster washers) is needed", "Texture complexity of the original plaster", "Ceiling vs. wall repairs", "Access and working height"],
+      note: "Plaster work requires more time and specialized materials than drywall, but we'll always give you a fixed, written estimate before starting.",
+    },
+    serviceFAQs: [
+      { q: "Should I replace my plaster walls with drywall?", a: "Usually no. Plaster is a valuable feature of older homes and removing it is expensive and messy. Almost all plaster problems can be repaired while preserving the original walls." },
+      { q: "Can you match the texture of my old plaster?", a: "Yes. We replicate sand, skip-trowel, hand-troweled, and smooth plaster finishes so the repaired area blends with the surrounding surface." },
+      { q: "My plaster is cracking in many places. Do I need to redo the whole wall?", a: "Not necessarily. Many older homes have widespread hairline cracks that can be skim-coated rather than fully replaced. We'll evaluate and give you honest options." },
+      { q: "Do you use traditional lime plaster or modern compound?", a: "We typically use modern setting-type joint compounds designed specifically for plaster repair, which bond strongly and finish smoothly. For historic preservation projects we can discuss traditional materials." },
+    ],
   },
   {
     slug: "drywall-installation",
@@ -48,6 +167,38 @@ export const SERVICES = [
     icon: "📐",
     benefits: ["Basement finishing", "Room renovations", "Additions & new construction", "Professional finishing"],
     keywords: ["drywall installation", "drywall hanging", "sheetrock installation", "new drywall"],
+    introParagraphs: [
+      "Whether you're finishing a Bergen County basement, renovating a kitchen, building an addition, or converting an attic, new drywall installation sets the stage for every finish that comes after it. Walls that are out of plane, seams that telegraph through paint, and outside corners that chip or crack can ruin an otherwise beautiful renovation. The Patch Boys of Bergen County installs drywall the way good contractors expect: square, plumb, tight-seamed, and finished to a Level 4 or Level 5 smoothness depending on the job.",
+      "We handle installations of every size, from a single wall replacement to finishing an entire basement or new addition. We hang standard 1/2-inch drywall, 5/8-inch Type X fire-rated drywall where code requires it, moisture-resistant green board for bathrooms and laundry rooms, and cement board for wet areas around tubs and showers. Every panel is fastened to manufacturer spacing, every seam is taped and three-coated, and every outside corner gets metal corner bead for durability.",
+      "Beyond the installation itself, we coordinate with the other trades on your project — electricians, plumbers, HVAC — to make sure rough-ins are complete and inspections have passed before we hang. And when we're done, you have a flat, paint-ready surface that lets your painter, trim carpenter, or cabinet installer do their best work.",
+    ],
+    processSteps: [
+      { title: "Site Measurement & Quote", description: "We measure your space, calculate square footage and panel count, and give you a fixed-price estimate including materials, labor, and finishing level." },
+      { title: "Material Delivery & Prep", description: "We deliver drywall, compound, tape, corner bead, and screws to your site and protect flooring and any existing finishes." },
+      { title: "Hanging the Panels", description: "We hang drywall horizontally on walls and perpendicular to joists on ceilings, fastening with screws at proper spacing and keeping seams tight." },
+      { title: "Corner Bead Installation", description: "We install metal or paper-faced corner bead on every outside corner to provide a clean, durable edge that resists chipping." },
+      { title: "Taping & Three-Coat Finish", description: "We tape every seam and inside corner, then apply three coats of joint compound, sanding between coats for a flat, feathered finish." },
+      { title: "Final Sanding & Walk-Through", description: "We sand the final coat to Level 4 (or Level 5 for critical lighting), vacuum the space, and walk through with you to confirm the surface is paint-ready." },
+    ],
+    commonIssues: [
+      { problem: "Basement finishing with moisture concerns", solution: "We use moisture-resistant drywall in below-grade spaces, proper vapor barriers, and leave air gaps behind the drywall where recommended." },
+      { problem: "Ceilings that need to hide beams and ductwork", solution: "We frame soffits and furr-downs, then drywall to create clean lines that disguise mechanicals while meeting clearance requirements." },
+      { problem: "Fire code requirements around garages and between units", solution: "We install 5/8-inch Type X fire-rated drywall wherever code requires it, with properly taped seams for the full fire rating." },
+      { problem: "Bathrooms, laundry rooms, and wet areas", solution: "We use green board moisture-resistant drywall for standard wet rooms and cement backer board behind tile in tub and shower surrounds." },
+      { problem: "High-end rooms with critical lighting", solution: "We deliver a Level 5 finish — a full skim coat over the entire surface — so raking light won't reveal seams or fastener heads." },
+      { problem: "Matching into existing drywall on renovations", solution: "We feather new seams into existing surfaces, tape carefully, and texture-match so old and new drywall blend invisibly." },
+    ],
+    pricingInfo: {
+      range: "Drywall installation in Bergen County typically runs $2–$4 per square foot installed and finished",
+      factors: ["Square footage and ceiling height", "Drywall type (standard, fire-rated, moisture-resistant, cement board)", "Finishing level (Level 3, 4, or 5)", "Number of corners, openings, and cutouts", "Accessibility and project complexity"],
+      note: "Every installation starts with a free, detailed written estimate so you know exactly what's included.",
+    },
+    serviceFAQs: [
+      { q: "Do you handle whole-room or whole-basement installations?", a: "Yes. We regularly finish entire basements, additions, and renovated rooms throughout Bergen County, from framing-ready to paint-ready." },
+      { q: "What finishing level do you deliver?", a: "We deliver a Level 4 finish by default, which is the standard for most walls and ceilings. For rooms with critical lighting, we offer Level 5 (full skim coat) for an additional charge." },
+      { q: "Do you haul away the debris?", a: "Yes. We include cleanup and debris removal in every installation quote — we don't leave drywall scraps or compound buckets behind." },
+      { q: "Can you coordinate with my electrician or plumber?", a: "Absolutely. We regularly work alongside other trades and can schedule our hang to happen right after electrical, plumbing, and HVAC rough-ins pass inspection." },
+    ],
   },
   {
     slug: "popcorn-ceiling-removal",
@@ -57,6 +208,38 @@ export const SERVICES = [
     icon: "✨",
     benefits: ["Safe removal process", "Modern smooth finish", "Increases home value", "Asbestos-aware procedures"],
     keywords: ["popcorn ceiling removal", "popcorn ceiling", "textured ceiling removal", "ceiling modernization"],
+    introParagraphs: [
+      "If your Bergen County home was built between the 1950s and the late 1980s, there's a good chance it has popcorn ceilings — also called acoustic or cottage-cheese texture — in at least one room. Popcorn was popular because it was cheap to spray, it hid imperfections, and it absorbed sound. Today, it's widely considered dated, it collects dust and cobwebs, and it can drag down the perceived value of an otherwise updated home. Removing popcorn ceilings and replacing them with a smooth modern finish is one of the single best cosmetic upgrades a homeowner can make.",
+      "The Patch Boys of Bergen County removes popcorn ceilings safely and cleanly. We protect your floors, walls, and furniture with heavy plastic and drop cloths, mist the texture with water to soften it, scrape it off in controlled sheets, and then skim-coat the ceiling to a smooth finish before priming and painting. The transformation is dramatic — rooms feel taller, brighter, and noticeably more modern.",
+      "We also take asbestos seriously. Popcorn texture applied before 1980 may contain asbestos, and any removal should begin with a test of the material. We coordinate asbestos testing with a certified lab and advise you on the right path forward. If the material tests positive, we'll refer you to a licensed abatement contractor; if it's negative, we can remove it ourselves as part of a complete ceiling refresh.",
+    ],
+    processSteps: [
+      { title: "Asbestos Testing (Pre-1980 Homes)", description: "We send a sample to a certified lab and wait for results before beginning any removal on homes that may have asbestos-containing texture." },
+      { title: "Room Prep & Containment", description: "We cover floors, walls, outlets, vents, and furniture with plastic sheeting and drop cloths to contain dust and water." },
+      { title: "Wet & Scrape", description: "We mist the ceiling with water, let it soak in, and scrape off the softened texture with wide drywall knives." },
+      { title: "Ceiling Repair", description: "After scraping, we repair any gouges, failed tape, or nail pops revealed during removal so the substrate is smooth." },
+      { title: "Skim Coat", description: "We apply one or two skim coats of joint compound over the entire ceiling and sand smooth for a flat, modern surface." },
+      { title: "Prime & Paint", description: "We apply a quality primer and finish coat of ceiling paint for a clean, bright, and updated look that instantly modernizes the room." },
+    ],
+    commonIssues: [
+      { problem: "Asbestos-containing texture in pre-1980 homes", solution: "We arrange testing and, if positive, refer you to a licensed abatement contractor. If negative, we proceed with standard removal." },
+      { problem: "Ceilings that have been painted over", solution: "Painted popcorn is harder to remove because water doesn't soak in. We may need to scrape dry or skim-coat directly over the texture." },
+      { problem: "Damaged drywall revealed after removal", solution: "We repair any gouges, failed tape, or water stains as part of the process before skim-coating." },
+      { problem: "Textured walls adjacent to popcorn ceilings", solution: "We mask and protect textured walls, then carefully feather the ceiling edge so the transition looks clean." },
+      { problem: "Dust and debris control", solution: "We contain the work area with plastic sheeting and clean thoroughly at the end of every visit to keep the rest of your home dust-free." },
+      { problem: "Large open-concept ceilings", solution: "We scope the job to minimize disruption, often working room-by-room so you can continue to use the rest of your home." },
+    ],
+    pricingInfo: {
+      range: "Popcorn ceiling removal in Bergen County typically runs $2.50–$5.00 per square foot",
+      factors: ["Room square footage and ceiling height", "Whether the popcorn has been painted over", "Asbestos testing results", "Condition of the underlying drywall", "Number of rooms and project scope"],
+      note: "We provide a free, fixed-price quote once we've tested for asbestos and measured the space.",
+    },
+    serviceFAQs: [
+      { q: "Does my popcorn ceiling contain asbestos?", a: "Popcorn applied before 1980 may contain asbestos. We recommend testing before removal. If your home was built after 1980, it's very unlikely to contain asbestos." },
+      { q: "How long does popcorn removal take?", a: "Most single-room removals take 1–2 days, including skim coating and paint. Larger homes with multiple rooms may take 3–5 days." },
+      { q: "Is the process messy?", a: "It's a wet, dusty process, but we contain the work area thoroughly with plastic sheeting and clean up completely at the end. Your floors, furniture, and walls are fully protected." },
+      { q: "Will removing popcorn increase my home's value?", a: "It typically does. Popcorn ceilings are widely viewed as dated, and buyers often see removal as a task they'd rather not take on themselves." },
+    ],
   },
   {
     slug: "texture-matching",
@@ -66,6 +249,38 @@ export const SERVICES = [
     icon: "🎨",
     benefits: ["Invisible repair results", "All texture types matched", "Orange peel & knockdown", "Expert color matching"],
     keywords: ["texture matching", "wall texture matching", "drywall texture", "knockdown texture", "orange peel texture"],
+    introParagraphs: [
+      "Texture matching is the difference between a drywall repair you can see and one you can't. A patched hole with the wrong texture is as obvious as no patch at all — sometimes worse, because now there's a smooth island surrounded by rough wall. The Patch Boys of Bergen County has built its reputation on invisible repairs, and texture matching is the skill that makes invisibility possible. Our technicians have hand-matched every common wall and ceiling texture used in Bergen County homes for decades, and we carry the equipment needed to replicate each one on site.",
+      "The most common textures we match are orange peel, knockdown, and smooth (Level 4 or Level 5) — these are standard in homes built from the 1980s onward. We also match stomp and swirl ceiling textures, sand and skip-trowel finishes common in older plaster homes, and hand-troweled custom textures that were applied by the original drywaller. Every texture has its own technique, its own tools, and its own timing, and we know them all.",
+      "Texture matching also includes paint blending, which is its own art. Even if the texture is perfect, a repair will stand out if the paint doesn't match — sheen differences, color fade, and touch-up technique all matter. We prime repairs correctly, feather paint into surrounding areas, and use the right roller nap for the existing texture so the repair disappears under normal lighting.",
+    ],
+    processSteps: [
+      { title: "Texture Analysis", description: "We examine the existing texture closely — pattern, depth, spacing, and technique — to identify exactly what we're matching." },
+      { title: "Practice Board", description: "For complex or hand-applied textures, we test on a practice board first to dial in the technique before touching your wall." },
+      { title: "Surface Prep", description: "We ensure the underlying compound is smooth and properly primed so the texture application will behave the same as the surrounding surface." },
+      { title: "Texture Application", description: "We spray, roll, stomp, or hand-trowel the texture using the method that matches your existing finish." },
+      { title: "Edge Blending", description: "We feather the texture edges into the surrounding surface so there's no visible transition line." },
+      { title: "Paint Match & Touch-Up", description: "We prime the textured area and blend paint using a matched color, sheen, and application technique for a truly invisible finish." },
+    ],
+    commonIssues: [
+      { problem: "Orange peel walls with light splatter", solution: "We use a texture hopper gun with fine-tip nozzle to spray a matching splatter pattern, then prime and paint." },
+      { problem: "Knockdown texture on walls and ceilings", solution: "We spray a heavier splatter, let it set briefly, and knock it down with a wide drywall knife to match the original flattened peaks." },
+      { problem: "Smooth Level 5 walls in high-end rooms", solution: "We skim-coat the repair, sand progressively finer, and feather wide so raking light doesn't reveal the patch." },
+      { problem: "Stomp, swirl, or rosebud ceiling texture", solution: "We apply thick joint compound and stamp the pattern with a sponge, brush, or trowel to match the original ceiling." },
+      { problem: "Hand-troweled sand and skip-trowel plaster", solution: "We hand-apply setting-type compound with a trowel, replicating the sweep and rhythm of the original finish." },
+      { problem: "Custom or one-of-a-kind textures", solution: "We analyze the original, test on a practice board, and replicate the technique until the match is indistinguishable." },
+    ],
+    pricingInfo: {
+      range: "Texture matching is typically included in drywall and ceiling repair pricing",
+      factors: ["Complexity of the original texture", "Whether we need a practice board to dial in the technique", "Size of the repair area", "Whether custom or hand-applied texture is required"],
+      note: "Texture matching is part of our repair process on every drywall and ceiling job — we don't charge extra unless the texture is highly custom or labor-intensive.",
+    },
+    serviceFAQs: [
+      { q: "Can you match any texture?", a: "We match every common texture used in Bergen County homes — orange peel, knockdown, smooth, stomp, swirl, sand, skip-trowel, and hand-troweled. If you have a highly custom texture, we can test-match on a practice board first." },
+      { q: "How close can you get to the original?", a: "Under normal lighting, our texture matches are invisible. Raking light can reveal any imperfection, which is why we offer Level 5 smooth finishes for rooms with critical lighting conditions." },
+      { q: "Do you match the paint too?", a: "Yes. Texture matching and paint matching go together — we prime the repair, blend paint color and sheen, and feather the touch-up into the surrounding wall." },
+      { q: "I've had a bad repair done before. Can you fix it?", a: "Yes. We regularly re-do repairs that other contractors left visible. We'll skim-coat the area, re-texture, and blend paint to make the original patch disappear." },
+    ],
   },
   {
     slug: "painting",
@@ -75,6 +290,38 @@ export const SERVICES = [
     icon: "🖌️",
     benefits: ["One contractor, complete job", "Expert color matching", "Interior touch-ups", "Full room painting available"],
     keywords: ["painting after drywall repair", "paint matching", "interior painting", "touch-up painting"],
+    introParagraphs: [
+      "A drywall repair isn't really finished until it's painted. Raw joint compound is porous and bright white, and skipping the paint step leaves an obvious patch — especially on colored walls. The Patch Boys of Bergen County offers painting and touch-up services as part of every repair, so you get a truly complete result from one contractor in a single visit. No coordinating a separate painter, no waiting days between appointments, no worrying about who's responsible for the final look.",
+      "We handle everything from small touch-ups around patched repairs to full-room repaints for Bergen County homeowners who want to refresh the whole space while the drop cloths are already down. We color-match your existing paint on site when you don't have the original can, we apply the right primer for the substrate, and we use the correct roller nap and application technique to match the surrounding wall texture and sheen.",
+      "Paint is where most DIY repairs go wrong — fresh paint applied over a repair flashes differently than the surrounding wall, sheens don't match, and the patch stands out even when the drywall work was good. We solve that by treating paint as the final, most important step of the repair, not an afterthought.",
+    ],
+    processSteps: [
+      { title: "Color & Sheen Match", description: "We match your existing paint color and sheen — either from your original can or by matching on-site with a handheld color reader." },
+      { title: "Primer Application", description: "We apply a stain-blocking or drywall primer to the repair area so the finish coat absorbs evenly and the patch doesn't flash." },
+      { title: "Feathered Touch-Up", description: "For small repairs, we roll paint onto the patch and feather it into the surrounding wall so the edge disappears." },
+      { title: "Full-Wall or Room Repaint", description: "For larger repairs or when touch-ups would be too visible, we repaint the full wall or room for a uniform finish." },
+      { title: "Trim & Cut-Ins", description: "We cut in cleanly along trim, ceilings, and corners, protecting adjacent surfaces with tape and drop cloths." },
+      { title: "Cleanup & Walk-Through", description: "We remove all protection, clean our tools and workspace, and walk through with you to confirm the finish is exactly what you expected." },
+    ],
+    commonIssues: [
+      { problem: "Patches that flash differently than the wall", solution: "We prime the repair correctly and, where needed, repaint the full wall corner-to-corner so the sheen is uniform." },
+      { problem: "Paint color that's faded or no longer available", solution: "We match on-site using a color reader, or we recommend repainting the full wall with a close modern equivalent." },
+      { problem: "Mismatched sheen between touch-up and original", solution: "We confirm the original sheen (flat, eggshell, satin, semi-gloss) and apply the matching sheen for a uniform final look." },
+      { problem: "Water stains bleeding through new paint", solution: "We use stain-blocking primer designed to seal water damage so stains don't ghost through the finish coat." },
+      { problem: "Popping nail heads and screws after paint", solution: "We reset fasteners, spot-prime, and feather touch-up paint so the repair doesn't show." },
+      { problem: "Rooms that need a full repaint while we're on site", solution: "We can expand the scope to repaint a full wall, a single room, or an entire floor while drop cloths and protection are already in place." },
+    ],
+    pricingInfo: {
+      range: "Touch-up paint is typically included in repair pricing; full-room painting runs $300–$900 per room",
+      factors: ["Scope (spot touch-up vs. full wall vs. full room)", "Ceiling height and wall square footage", "Color changes vs. same-color repaint", "Trim, doors, and ceilings included", "Wall condition and prep required"],
+      note: "We include reasonable touch-up paint with every repair at no extra charge. Full-room and whole-house painting are quoted separately.",
+    },
+    serviceFAQs: [
+      { q: "Do you include painting with drywall repairs?", a: "Yes — basic touch-up painting is included with most of our drywall and ceiling repairs so you get a complete result from one contractor." },
+      { q: "Can you match my existing paint color?", a: "Yes. We can match on-site using a handheld color reader, or we can use your original paint if you still have some. For older faded paint, we may recommend a full-wall repaint for the cleanest look." },
+      { q: "Will the touch-up be visible?", a: "Properly executed touch-ups are invisible under normal lighting. For high-visibility rooms or walls with aged paint, we sometimes recommend repainting the full wall to guarantee a uniform finish." },
+      { q: "Do you do whole-room or whole-house painting?", a: "Yes. We regularly repaint full rooms and entire homes throughout Bergen County, often in combination with drywall and ceiling repair work." },
+    ],
   },
 ];
 

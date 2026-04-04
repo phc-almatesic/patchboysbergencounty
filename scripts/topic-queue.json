@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-02T16:07:13.687Z",
+  "lastUpdated": "2026-04-04T00:00:00.000Z",
   "rotationIndex": 5,
   "topics": [
     {
@@ -1186,6 +1186,265 @@
         "bergen county"
       ],
       "primaryKeyword": "fall home repair Bergen County",
+      "generated": false
+    },
+    {
+      "id": "howto-64",
+      "template": "how-to",
+      "title": "How to Patch a Small Hole in Drywall: A Step-by-Step Guide",
+      "slug": "how-to-patch-small-hole-drywall",
+      "service": "drywall-repair",
+      "categories": [
+        "How-To Guides",
+        "Drywall Repair"
+      ],
+      "tags": [
+        "drywall-repair",
+        "how-to",
+        "bergen county",
+        "diy"
+      ],
+      "primaryKeyword": "how to patch small hole in drywall",
+      "generated": false
+    },
+    {
+      "id": "howto-65",
+      "template": "how-to",
+      "title": "Why Does My Ceiling Have Water Stains? (And How to Fix Them Properly)",
+      "slug": "ceiling-water-stains-causes-fix",
+      "service": "ceiling-repair",
+      "categories": [
+        "How-To Guides",
+        "Ceiling Repair"
+      ],
+      "tags": [
+        "ceiling-repair",
+        "how-to",
+        "water damage",
+        "bergen county"
+      ],
+      "primaryKeyword": "ceiling water stains",
+      "generated": false
+    },
+    {
+      "id": "howto-66",
+      "template": "how-to",
+      "title": "How to Hire a Drywall Contractor in Bergen County: The 10-Point Checklist",
+      "slug": "how-to-hire-drywall-contractor-bergen-county",
+      "service": "drywall-repair",
+      "categories": [
+        "How-To Guides",
+        "Drywall Repair"
+      ],
+      "tags": [
+        "drywall-repair",
+        "hiring",
+        "bergen county"
+      ],
+      "primaryKeyword": "how to hire drywall contractor Bergen County",
+      "generated": false
+    },
+    {
+      "id": "howto-67",
+      "template": "how-to",
+      "title": "How to Prep Walls Before Painting After a Drywall Repair",
+      "slug": "prep-walls-before-painting-after-repair",
+      "service": "painting",
+      "categories": [
+        "How-To Guides",
+        "Painting"
+      ],
+      "tags": [
+        "painting",
+        "how-to",
+        "bergen county",
+        "diy"
+      ],
+      "primaryKeyword": "prep walls before painting",
+      "generated": false
+    },
+    {
+      "id": "howto-68",
+      "template": "how-to",
+      "title": "Dealing With Mold Behind Drywall After a Leak",
+      "slug": "mold-behind-drywall-after-leak",
+      "service": "drywall-repair",
+      "categories": [
+        "How-To Guides",
+        "Drywall Repair"
+      ],
+      "tags": [
+        "drywall-repair",
+        "mold",
+        "water damage",
+        "bergen county"
+      ],
+      "primaryKeyword": "mold behind drywall",
+      "generated": false
+    },
+    {
+      "id": "howto-69",
+      "template": "how-to",
+      "title": "Plaster or Drywall? How to Tell Which Walls You Have (And Why It Matters)",
+      "slug": "plaster-vs-drywall-how-to-tell",
+      "service": "plaster-repair",
+      "categories": [
+        "How-To Guides",
+        "Plaster Repair"
+      ],
+      "tags": [
+        "plaster-repair",
+        "how-to",
+        "bergen county"
+      ],
+      "primaryKeyword": "plaster vs drywall",
+      "generated": false
+    },
+    {
+      "id": "howto-70",
+      "template": "how-to",
+      "title": "What Is a Level 5 Drywall Finish (And When Do You Actually Need One)?",
+      "slug": "level-5-drywall-finish-explained",
+      "service": "drywall-installation",
+      "categories": [
+        "How-To Guides",
+        "Drywall Installation"
+      ],
+      "tags": [
+        "drywall-installation",
+        "how-to",
+        "bergen county"
+      ],
+      "primaryKeyword": "level 5 drywall finish",
+      "generated": false
+    },
+    {
+      "id": "howto-71",
+      "template": "how-to",
+      "title": "Drywall Texture Types Explained: Orange Peel, Knockdown, Smooth & More",
+      "slug": "drywall-texture-types-guide",
+      "service": "texture-matching",
+      "categories": [
+        "How-To Guides",
+        "Texture Matching"
+      ],
+      "tags": [
+        "texture-matching",
+        "how-to",
+        "bergen county"
+      ],
+      "primaryKeyword": "drywall texture types",
+      "generated": false
+    },
+    {
+      "id": "cost-72",
+      "template": "cost",
+      "title": "Basement Drywall Finishing Cost in Bergen County (2026)",
+      "slug": "basement-drywall-finishing-cost-bergen-county",
+      "service": "drywall-installation",
+      "categories": [
+        "Cost Guides",
+        "Drywall Installation"
+      ],
+      "tags": [
+        "drywall-installation",
+        "cost guide",
+        "bergen county",
+        "pricing"
+      ],
+      "primaryKeyword": "basement drywall finishing cost Bergen County",
+      "generated": false
+    },
+    {
+      "id": "cost-73",
+      "template": "cost",
+      "title": "How Much Does It Cost to Fix a Hole in the Wall? (2026 Pricing)",
+      "slug": "cost-to-fix-hole-in-wall-2026",
+      "service": "drywall-repair",
+      "categories": [
+        "Cost Guides",
+        "Drywall Repair"
+      ],
+      "tags": [
+        "drywall-repair",
+        "cost guide",
+        "bergen county",
+        "pricing"
+      ],
+      "primaryKeyword": "cost to fix hole in wall",
+      "generated": false
+    },
+    {
+      "id": "signs-74",
+      "template": "signs",
+      "title": "Sagging Ceiling: Causes, Risks, and When to Call a Pro",
+      "slug": "sagging-ceiling-causes-when-to-call-pro",
+      "service": "ceiling-repair",
+      "categories": [
+        "Home Tips",
+        "Ceiling Repair"
+      ],
+      "tags": [
+        "ceiling-repair",
+        "warning signs",
+        "bergen county"
+      ],
+      "primaryKeyword": "sagging ceiling causes",
+      "generated": false
+    },
+    {
+      "id": "signs-75",
+      "template": "signs",
+      "title": "Hairline Cracks in Walls: Cosmetic Issue or Structural Warning?",
+      "slug": "hairline-cracks-walls-cosmetic-or-structural",
+      "service": "drywall-repair",
+      "categories": [
+        "Home Tips",
+        "Drywall Repair"
+      ],
+      "tags": [
+        "drywall-repair",
+        "warning signs",
+        "bergen county"
+      ],
+      "primaryKeyword": "hairline cracks in walls",
+      "generated": false
+    },
+    {
+      "id": "signs-76",
+      "template": "signs",
+      "title": "7 Red Flags When Hiring a Drywall Repair Company",
+      "slug": "red-flags-hiring-drywall-repair-company",
+      "service": "drywall-repair",
+      "categories": [
+        "Home Tips",
+        "Drywall Repair"
+      ],
+      "tags": [
+        "drywall-repair",
+        "warning signs",
+        "hiring",
+        "bergen county"
+      ],
+      "primaryKeyword": "red flags hiring drywall contractor",
+      "generated": false
+    },
+    {
+      "id": "seasonal-77",
+      "template": "seasonal",
+      "title": "Pre-Winter Ceiling Check: A Bergen County Homeowner's Checklist",
+      "slug": "pre-winter-ceiling-check-bergen-county",
+      "service": "ceiling-repair",
+      "categories": [
+        "Seasonal Tips",
+        "Ceiling Repair"
+      ],
+      "tags": [
+        "ceiling-repair",
+        "seasonal",
+        "bergen county"
+      ],
+      "primaryKeyword": "pre-winter ceiling check Bergen County",
       "generated": false
     }
   ]

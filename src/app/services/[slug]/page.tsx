@@ -109,10 +109,12 @@ export default async function ServicePage({ params }: Props) {
               <h2 className="text-3xl font-bold text-navy mb-6">
                 Professional {service.title} Services in Bergen County
               </h2>
-              <p className="text-gray-600 leading-relaxed text-lg mb-8">{service.longDesc}</p>
+              {service.introParagraphs.map((p, i) => (
+                <p key={i} className="text-gray-600 leading-relaxed text-lg mb-6">{p}</p>
+              ))}
 
-              <h3 className="text-2xl font-bold text-navy mb-4">Why Choose Us for {service.title}?</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <h3 className="text-2xl font-bold text-navy mb-4 mt-10">Why Choose Us for {service.title}?</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                 {service.benefits.map((b) => (
                   <div key={b} className="flex items-start gap-3 bg-gray-warm p-4 rounded-lg">
                     <span className="text-orange font-bold text-xl" aria-hidden="true">✓</span>
@@ -121,7 +123,55 @@ export default async function ServicePage({ params }: Props) {
                 ))}
               </div>
 
-              <h3 className="text-2xl font-bold text-navy mb-4">
+              <h3 className="text-2xl font-bold text-navy mb-4 mt-10">Our {service.title} Process</h3>
+              <ol className="space-y-4 mb-10">
+                {service.processSteps.map((step, i) => (
+                  <li key={i} className="flex gap-4">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-orange text-white font-bold flex items-center justify-center" aria-hidden="true">{i + 1}</span>
+                    <div>
+                      <h4 className="text-lg font-bold text-navy mb-1">{step.title}</h4>
+                      <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+
+              <h3 className="text-2xl font-bold text-navy mb-4 mt-10">Common {service.title} Issues We Solve</h3>
+              <div className="space-y-4 mb-10">
+                {service.commonIssues.map((issue, i) => (
+                  <div key={i} className="bg-gray-warm rounded-lg p-5 border-l-4 border-orange">
+                    <h4 className="font-bold text-navy mb-2">{issue.problem}</h4>
+                    <p className="text-gray-700 leading-relaxed">{issue.solution}</p>
+                  </div>
+                ))}
+              </div>
+
+              <h3 className="text-2xl font-bold text-navy mb-4 mt-10">{service.title} Pricing in Bergen County</h3>
+              <div className="bg-navy rounded-xl p-6 text-white mb-10">
+                <p className="text-xl font-semibold mb-4">{service.pricingInfo.range}</p>
+                <p className="text-white/90 mb-3 font-medium">Pricing depends on:</p>
+                <ul className="space-y-2 mb-4">
+                  {service.pricingInfo.factors.map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-white/90">
+                      <span className="text-orange font-bold" aria-hidden="true">•</span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-white/80 text-sm italic">{service.pricingInfo.note}</p>
+              </div>
+
+              <h3 className="text-2xl font-bold text-navy mb-4 mt-10">{service.title} FAQs</h3>
+              <div className="space-y-4 mb-10">
+                {service.serviceFAQs.map((faq, i) => (
+                  <div key={i} className="bg-white border border-gray-200 rounded-lg p-5">
+                    <h4 className="font-bold text-navy mb-2">{faq.q}</h4>
+                    <p className="text-gray-700 leading-relaxed">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
+
+              <h3 className="text-2xl font-bold text-navy mb-4 mt-10">
                 {service.title} in Your Bergen County Town
               </h3>
               <p className="text-gray-600 mb-4">
@@ -211,6 +261,18 @@ export default async function ServicePage({ params }: Props) {
                 { "@type": "ListItem", position: 2, name: "Services", item: "https://www.bergencountypatchboys.com/services/" },
                 { "@type": "ListItem", position: 3, name: service.title },
               ],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: service.serviceFAQs.map((faq) => ({
+                "@type": "Question",
+                name: faq.q,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.a,
+                },
+              })),
             },
           ]),
         }}
