@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-04-04T00:00:00.000Z",
-  "rotationIndex": 5,
+  "lastUpdated": "2026-04-09T16:23:41.376Z",
+  "rotationIndex": 6,
   "topics": [
     {
       "id": "loc-1",
@@ -1096,7 +1096,7 @@
         "bergen county"
       ],
       "primaryKeyword": "DIY popcorn ceiling removal",
-      "generated": false
+      "generated": true
     },
     {
       "id": "diy-59",
