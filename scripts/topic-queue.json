@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-04-09T16:23:41.376Z",
-  "rotationIndex": 6,
+  "lastUpdated": "2026-04-16T16:27:29.364Z",
+  "rotationIndex": 7,
   "topics": [
     {
       "id": "loc-1",
@@ -1150,7 +1150,7 @@
         "bergen county"
       ],
       "primaryKeyword": "spring home renovation Bergen County",
-      "generated": false
+      "generated": true
     },
     {
       "id": "seasonal-62",
