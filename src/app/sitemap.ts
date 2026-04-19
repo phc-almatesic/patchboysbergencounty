@@ -5,7 +5,7 @@ import { getAllPosts, getAllCategories, slugifyCategory } from "@/lib/blog";
 export const dynamic = "force-static";
 
 const BASE_URL = "https://www.bergencountypatchboys.com";
-const LAST_UPDATED = new Date("2026-02-16");
+const LAST_UPDATED = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BUSINESS, SERVICES, BERGEN_TOWNS, TESTIMONIALS, FAQ } from "@/lib/data";
 import { getRecentPosts } from "@/lib/blog";
@@ -5,6 +6,27 @@ import ContactForm from "@/components/ContactForm";
 import PhoneLink from "@/components/PhoneLink";
 import TrackedCTA from "@/components/TrackedCTA";
 import BlogCard from "@/components/BlogCard";
+
+const HOMEPAGE_TITLE = "Drywall Contractor Bergen County NJ | Free Estimates | The Patch Boys";
+const HOMEPAGE_DESCRIPTION =
+  "Bergen County's trusted drywall contractor. Free estimates, same-day service, and seamless repairs on holes, cracks, and water damage across all of Bergen County, NJ.";
+
+export const metadata: Metadata = {
+  title: { absolute: HOMEPAGE_TITLE },
+  description: HOMEPAGE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: HOMEPAGE_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: HOMEPAGE_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
+  },
+};
 
 function HeroSection() {
   return (
@@ -21,7 +43,7 @@ function HeroSection() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
               Expert Drywall Repair in{" "}
-              <span className="text-orange">Bergen County</span>
+              <span className="text-orange">Bergen County, NJ</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
               Holes, cracks, water damage — we fix it all. Professional drywall repairs with free estimates, same-day service, and results so seamless you&apos;ll forget there was ever damage.
