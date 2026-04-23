@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-04-16T16:27:29.364Z",
-  "rotationIndex": 7,
+  "lastUpdated": "2026-04-23T16:48:05.351Z",
+  "rotationIndex": 0,
   "topics": [
     {
       "id": "loc-1",
@@ -57,7 +57,7 @@
         "bergen county"
       ],
       "primaryKeyword": "drywall repair Fort Lee NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "loc-4",
