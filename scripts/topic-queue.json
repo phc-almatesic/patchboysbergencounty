@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-04-23T16:48:05.351Z",
-  "rotationIndex": 0,
+  "lastUpdated": "2026-04-30T16:26:17.036Z",
+  "rotationIndex": 1,
   "topics": [
     {
       "id": "loc-1",
@@ -741,7 +741,7 @@
         "pricing"
       ],
       "primaryKeyword": "drywall repair cost Bergen County NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "cost-40",
