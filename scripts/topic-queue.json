@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-05-07T16:59:02.640Z",
-  "rotationIndex": 2,
+  "lastUpdated": "2026-05-14T17:05:32.463Z",
+  "rotationIndex": 3,
   "topics": [
     {
       "id": "loc-1",
@@ -912,7 +912,7 @@
         "diy"
       ],
       "primaryKeyword": "how to repair ceiling cracks",
-      "generated": false
+      "generated": true
     },
     {
       "id": "howto-49",
