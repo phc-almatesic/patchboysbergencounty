@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-05-28T18:16:59.378Z",
-  "rotationIndex": 5,
+  "lastUpdated": "2026-06-04T17:49:19.076Z",
+  "rotationIndex": 6,
   "topics": [
     {
       "id": "loc-1",
@@ -1114,7 +1114,7 @@
         "bergen county"
       ],
       "primaryKeyword": "DIY vs professional plaster repair",
-      "generated": false
+      "generated": true
     },
     {
       "id": "seasonal-60",
