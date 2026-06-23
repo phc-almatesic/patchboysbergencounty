@@ -3,7 +3,7 @@
 
 export const BLOG_CONFIG = {
   contentDir: "content/blog",
-  model: "claude-sonnet-4-20250514" as const,
+  model: "claude-sonnet-4-6" as const,
   maxTokens: 4096,
   targetWordCount: { min: 800, max: 1200 },
 };
