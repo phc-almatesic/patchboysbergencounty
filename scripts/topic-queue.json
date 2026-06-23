@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-06-04T17:49:19.076Z",
-  "rotationIndex": 6,
+  "lastUpdated": "2026-06-23T13:59:00.238Z",
+  "rotationIndex": 7,
   "topics": [
     {
       "id": "loc-1",
@@ -1168,7 +1168,7 @@
         "bergen county"
       ],
       "primaryKeyword": "humidity drywall damage NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "seasonal-63",
