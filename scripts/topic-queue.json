@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-06-23T13:59:00.238Z",
-  "rotationIndex": 7,
+  "lastUpdated": "2026-07-02T16:56:46.157Z",
+  "rotationIndex": 0,
   "topics": [
     {
       "id": "loc-1",
@@ -114,7 +114,7 @@
         "bergen county"
       ],
       "primaryKeyword": "drywall repair Paramus NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "loc-7",
