@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-07-02T16:56:46.157Z",
-  "rotationIndex": 0,
+  "lastUpdated": "2026-07-09T17:24:55.700Z",
+  "rotationIndex": 1,
   "topics": [
     {
       "id": "loc-1",
@@ -760,7 +760,7 @@
         "pricing"
       ],
       "primaryKeyword": "ceiling repair cost Bergen County NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "cost-41",
