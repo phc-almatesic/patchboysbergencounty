@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-13T16:03:49.936Z",
-  "rotationIndex": 5,
+  "lastUpdated": "2026-08-20T15:40:46.097Z",
+  "rotationIndex": 7,
   "topics": [
     {
       "id": "loc-1",
@@ -1186,7 +1186,7 @@
         "bergen county"
       ],
       "primaryKeyword": "fall home repair Bergen County",
-      "generated": false
+      "generated": true
     },
     {
       "id": "howto-64",
