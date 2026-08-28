@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-20T15:40:46.097Z",
-  "rotationIndex": 7,
+  "lastUpdated": "2026-08-28T00:21:23.771Z",
+  "rotationIndex": 0,
   "topics": [
     {
       "id": "loc-1",
@@ -171,7 +171,7 @@
         "bergen county"
       ],
       "primaryKeyword": "drywall repair Bergenfield NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "loc-10",
