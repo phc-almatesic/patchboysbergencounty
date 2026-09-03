@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-28T00:21:23.771Z",
-  "rotationIndex": 0,
+  "lastUpdated": "2026-09-03T18:29:10.292Z",
+  "rotationIndex": 1,
   "topics": [
     {
       "id": "loc-1",
@@ -779,7 +779,7 @@
         "pricing"
       ],
       "primaryKeyword": "plaster repair cost Bergen County NJ",
-      "generated": false
+      "generated": true
     },
     {
       "id": "cost-42",
